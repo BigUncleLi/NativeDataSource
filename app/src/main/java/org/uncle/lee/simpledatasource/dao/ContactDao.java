@@ -8,10 +8,6 @@ import org.uncle.lee.simpledatasource.listener.DaoListener;
  * Created by Austin on 2016/7/6.
  */
 public class ContactDao implements Dao<Contact, String>{
-  @Override public void init() {
-
-  }
-
   @Override public void insert(List<Contact> contacts) {
 
   }

@@ -22,7 +22,7 @@ public class Client {
   private static void testApp(DataController instance) {
     Dao<Contact, String> contactDao = instance.contactDao();
     contactDao.setListener(new ContactListener() {
-      @Override public void onActionDone(Dao.DaoActionType type, Objects... objects) {
+      @Override public void onActionDone(Dao.DaoActionType type, List<Contact> contacts) {
 
       }
     });

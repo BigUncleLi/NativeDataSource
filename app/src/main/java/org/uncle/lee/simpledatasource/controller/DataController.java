@@ -14,7 +14,10 @@ public class DataController {
   private Dao<Contact, String> contactDao;
   private Dao<App, String> appDao;
 
-  private DataController(){}
+  private DataController(){
+    appDao = new AppDao();
+    contactDao = new ContactDao();
+  }
 
   public static DataController getInstance(){
     if(dataController == null){
@@ -25,21 +28,6 @@ public class DataController {
       }
     }
     return dataController;
-  }
-
-  public void init(){
-    initContactDao();
-    initAppDat();
-  }
-
-  private void initAppDat() {
-    appDao = new AppDao();
-    appDao.init();
-  }
-
-  private void initContactDao() {
-    contactDao = new ContactDao();
-    contactDao.init();
   }
 
   public Dao<Contact, String> contactDao() {

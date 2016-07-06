@@ -2,17 +2,12 @@ package org.uncle.lee.simpledatasource.dao;
 
 import java.util.List;
 import org.uncle.lee.simpledatasource.entity.App;
-import org.uncle.lee.simpledatasource.listener.AppListener;
 import org.uncle.lee.simpledatasource.listener.DaoListener;
 
 /**
  * Created by Austin on 2016/7/6.
  */
 public class AppDao implements Dao<App, String>{
-  @Override public void init() {
-
-  }
-
   @Override public void insert(List<App> apps) {
 
   }

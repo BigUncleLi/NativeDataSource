@@ -8,5 +8,5 @@ import org.uncle.lee.simpledatasource.dao.Dao;
  * Created by Austin on 2016/7/6.
  */
 public interface DaoListener <T>{
-  public abstract void onActionDone(Dao.DaoActionType type, Objects... objects);
+  public abstract void onActionDone(Dao.DaoActionType type, List<T> tList);
 }
