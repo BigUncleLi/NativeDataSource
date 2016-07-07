@@ -77,4 +77,13 @@ public class App {
         this.className = className;
     }
 
+    @Override public String toString() {
+        return "App{" +
+            "id=" + id +
+            ", packageName='" + packageName + '\'' +
+            ", appLabel='" + appLabel + '\'' +
+            ", appPyLabel='" + appPyLabel + '\'' +
+            ", className='" + className + '\'' +
+            '}';
+    }
 }

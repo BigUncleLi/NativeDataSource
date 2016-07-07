@@ -1,19 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="org.uncle.lee.simpledatasource.MainActivity"
     >
 
-  <TextView
-      android:text="Hello World!"
-      android:layout_width="wrap_content"
+  <Button
+      android:id="@+id/bt_insert_app"
+      android:text="insert one app"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       />
-</RelativeLayout>
+
+  <Button
+      android:id="@+id/bt_query_apps"
+      android:text="query all apps"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      />
+
+  <Button
+      android:id="@+id/bt_clean_apps"
+      android:text="clean apps"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      />
+
+  <Button
+      android:id="@+id/bt_insert_contact"
+      android:text="insert one contact"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      />
+
+  <Button
+      android:id="@+id/bt_query_contacts"
+      android:text="query all contacts"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      />
+
+  <Button
+      android:id="@+id/bt_clean_contacts"
+      android:text="clean contacts"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      />
+</LinearLayout>

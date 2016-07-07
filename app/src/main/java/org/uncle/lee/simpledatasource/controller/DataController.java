@@ -1,40 +1,22 @@
 package org.uncle.lee.simpledatasource.controller;
 
-import org.uncle.lee.simpledatasource.Entity.App;
-import org.uncle.lee.simpledatasource.Entity.Contact;
-import org.uncle.lee.simpledatasource.dao.AppDao;
-import org.uncle.lee.simpledatasource.dao.ContactDao;
-import org.uncle.lee.simpledatasource.dao.Dao;
+import java.util.List;
 
 /**
  * Created by Austin on 2016/7/6.
  */
-public class DataController {
-  private static DataController dataController;
-  private Dao<Contact, String> contactDao;
-  private Dao<App, String> appDao;
+public interface DataController<T, K> {
+  public static final String DATABASE_NAME = "uniInfo-db";
 
-  private DataController(){
-    appDao = new AppDao();
-    contactDao = new ContactDao();
-  }
+  public abstract void insert(List<T> tList);
 
-  public static DataController getInstance(){
-    if(dataController == null){
-      synchronized (DataController.class){
-        if(dataController == null){
-          dataController = new DataController();
-        }
-      }
-    }
-    return dataController;
-  }
+  public abstract List<T> queryAll();
 
-  public Dao<Contact, String> contactDao() {
-    return contactDao;
-  }
+  public abstract void clean();
 
-  public Dao<App, String> appDao() {
-    return appDao;
-  }
+  public abstract void insert(T t);
+
+  public abstract boolean deleteByKeyword(K k);
+
+  public abstract boolean update(T origin, T target);
 }

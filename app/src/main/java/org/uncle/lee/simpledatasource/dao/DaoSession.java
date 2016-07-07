@@ -1,7 +1,6 @@
-package org.uncle.lee.simpledatasource.green.dao;
+package org.uncle.lee.simpledatasource.dao;
 
 import java.util.Map;
-
 import org.greenrobot.greendao.AbstractDao;
 import org.greenrobot.greendao.AbstractDaoSession;
 import org.greenrobot.greendao.database.Database;
