@@ -2,19 +2,25 @@ package org.uncle.lee.simpledatasource.controller;
 
 import android.database.sqlite.SQLiteDatabase;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 import org.uncle.lee.simpledatasource.Entity.App;
 import org.uncle.lee.simpledatasource.dao.AppDao;
 import org.uncle.lee.simpledatasource.dao.DaoMaster;
 import org.uncle.lee.simpledatasource.dao.DaoSession;
+import org.uncle.lee.simpledatasource.listener.DataControllerListener;
 
 /**
  * Created by Austin on 2016/7/6.
  */
 public class AppDataController extends AbstractDataController<App, String> {
+  private DataControllerListener<App> listener;
+  private ExecutorService threadPool;
   private AppDao readAppDao;
   private AppDao writeAppDao;
+  private App appTemp;
 
-  public AppDataController(DaoMaster.DevOpenHelper devOpenHelper) {
+  public AppDataController(DaoMaster.DevOpenHelper devOpenHelper, ExecutorService threadPool) {
+    this.threadPool = threadPool;
     readAppDao = createReadAppDao(devOpenHelper);
     writeAppDao = createWriteAppDao(devOpenHelper);
   }
@@ -33,16 +39,48 @@ public class AppDataController extends AbstractDataController<App, String> {
     return daoSession.getAppDao();
   }
 
-  @Override public List<App> queryAll() {
-    return readAppDao.loadAll();
+  @Override public void insert(App app) {
+    this.appTemp = app;
+    this.threadPool.submit(new Runnable() {
+      @Override public void run() {
+        insertSyn(appTemp);
+      }
+    });
+  }
+
+  private synchronized void insertSyn(App app) {
+    writeAppDao.insert(app);
+    this.listener.onAction(DataControllerListener.ActionType.INSERT_DONE, true, null);
+  }
+
+  @Override public void queryAll() {
+    this.threadPool.submit(new Runnable() {
+      @Override public void run() {
+        queryAll();
+      }
+    });
+  }
+
+  private synchronized void queryAllSyn() {
+    List<App> appList = readAppDao.loadAll();
+    this.listener.onAction(DataControllerListener.ActionType.QUERY_ALL_DONE, true, appList);
   }
 
   @Override public void clean() {
-    writeAppDao.deleteAll();
+    this.threadPool.submit(new Runnable() {
+      @Override public void run() {
+        cleanSyn();
+      }
+    });
   }
 
-  @Override public void insert(App app) {
-    writeAppDao.insert(app);
+  private synchronized void cleanSyn() {
+    writeAppDao.deleteAll();
+    this.listener.onAction(DataControllerListener.ActionType.CLEAN_DONE, true, null);
+  }
+
+  @Override public void setListener(DataControllerListener<App> listener) {
+    this.listener = listener;
   }
 
   @Override public boolean deleteByKeyword(String s) {

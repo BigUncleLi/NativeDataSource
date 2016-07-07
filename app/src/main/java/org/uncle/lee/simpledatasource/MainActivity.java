@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import java.util.ArrayList;
 import java.util.List;
 import org.uncle.lee.simpledatasource.Entity.App;
 import org.uncle.lee.simpledatasource.Entity.Contact;
 import org.uncle.lee.simpledatasource.controller.pub.UniDataController;
 
 public class MainActivity extends AppCompatActivity {
+  public static final String TAG = "uniDatabase";
   private UniDataController instance;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,9 @@ public class MainActivity extends AppCompatActivity {
     @Override public void onClick(View v) {
       switch(v.getId()){
         case R.id.bt_insert_app:
-          instance.appDao().insert(new App(null,"app1", "applabel", "pyLabel", "className"));
+          Log.d(TAG, "insert start ... ");
+          instance.appDao().insert(createAppList());
+          Log.d(TAG, "insert finish ... ");
           break;
         case R.id.bt_query_apps:
           List<App> apps = instance.appDao().queryAll();
@@ -69,8 +73,17 @@ public class MainActivity extends AppCompatActivity {
 
     private <T> void show(List<T> ts){
       for(T t : ts){
-        Log.d("uniDatabase", t.toString());
+        Log.d(TAG, t.toString());
       }
     }
   };
+
+  private List<App> createAppList() {
+    List<App> appList = new ArrayList<App>();
+    for(int i = 0; i < 1000; i++){
+      App app = new App(null, "app" + i, "applabe" + i, "pyLabe" + i, "className" + i);
+      appList.add(app);
+    }
+    return appList;
+  }
 }

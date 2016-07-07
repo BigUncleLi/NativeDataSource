@@ -2,19 +2,25 @@ package org.uncle.lee.simpledatasource.controller;
 
 import android.database.sqlite.SQLiteDatabase;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 import org.uncle.lee.simpledatasource.Entity.Contact;
 import org.uncle.lee.simpledatasource.dao.ContactDao;
 import org.uncle.lee.simpledatasource.dao.DaoMaster;
 import org.uncle.lee.simpledatasource.dao.DaoSession;
+import org.uncle.lee.simpledatasource.listener.DataControllerListener;
 
 /**
  * Created by Austin on 2016/7/6.
  */
 public class ContactDataController extends AbstractDataController<Contact, String> {
+  private DataControllerListener<Contact> listener;
+  private ExecutorService threadPool;
   private ContactDao readContactDao;
   private ContactDao writeContactDao;
+  private Contact contactTemp;
 
-  public ContactDataController(DaoMaster.DevOpenHelper devOpenHelper) {
+  public ContactDataController(DaoMaster.DevOpenHelper devOpenHelper, ExecutorService threadPool) {
+    this.threadPool = threadPool;
     readContactDao = createReadContactDao(devOpenHelper);
     writeContactDao = createWriteContactDao(devOpenHelper);
   }
@@ -33,16 +39,48 @@ public class ContactDataController extends AbstractDataController<Contact, Strin
     return daoSession.getContactDao();
   }
 
-  @Override public List<Contact> queryAll() {
-    return readContactDao.loadAll();
+  @Override public void insert(Contact contact) {
+    this.contactTemp = contact;
+    this.threadPool.submit(new Runnable() {
+      @Override public void run() {
+        insertSyn(contactTemp);
+      }
+    });
+  }
+
+  private synchronized void insertSyn(Contact contact) {
+    writeContactDao.insert(contact);
+    this.listener.onAction(DataControllerListener.ActionType.INSERT_DONE, true, null);
+  }
+
+  @Override public void queryAll() {
+    this.threadPool.submit(new Runnable() {
+      @Override public void run() {
+        queryAllSyn();
+      }
+    });
+  }
+
+  private synchronized void queryAllSyn() {
+    List<Contact> contactList = readContactDao.loadAll();
+    this.listener.onAction(DataControllerListener.ActionType.QUERY_ALL_DONE, true, contactList);
   }
 
   @Override public void clean() {
-    writeContactDao.deleteAll();
+    this.threadPool.submit(new Runnable() {
+      @Override public void run() {
+        cleanSyn();
+      }
+    });
   }
 
-  @Override public void insert(Contact contact) {
-    writeContactDao.insert(contact);
+  private synchronized void cleanSyn() {
+    writeContactDao.deleteAll();
+    this.listener.onAction(DataControllerListener.ActionType.CLEAN_DONE, true, null);
+  }
+
+  @Override public void setListener(DataControllerListener<Contact> listener) {
+    this.listener = listener;
   }
 
   @Override public boolean deleteByKeyword(String s) {
