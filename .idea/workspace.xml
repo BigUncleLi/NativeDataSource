@@ -31,14 +31,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="586d5049-4c52-4965-be25-df4bacee02c8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/data/center/DataCenter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/listener/DataControllerListener.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/data/center/UniDataCenter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/listener/UniDataCenterListener.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/controller/AppDataController.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/controller/AppDataController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/controller/ContactDataController.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/controller/ContactDataController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/controller/DataController.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/controller/DataController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/controller/pub/UniDataController.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/controller/pub/UniDataController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/data/center/DataCenter.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/data/center/DataCenter.java" />
     </list>
     <ignored path="SimpleDataSource.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -83,133 +80,7 @@
     <favorites_list name="SimpleDataSource" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AppDataController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/controller/AppDataController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="76" column="28" selection-start-line="76" selection-start-column="28" selection-end-line="76" selection-end-column="28" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1667#1761#0" expanded="true" />
-                <element signature="e#1760#1761#0" expanded="true" />
-                <element signature="e#2003#2089#0" expanded="true" />
-                <element signature="e#2088#2089#0" expanded="true" />
-                <element signature="e#2346#2432#0" expanded="true" />
-                <element signature="e#2431#2432#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DataCenter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/data/center/DataCenter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="13" column="42" selection-start-line="13" selection-start-column="42" selection-end-line="13" selection-end-column="42" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AbstractDataController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/controller/AbstractDataController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DataController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/controller/DataController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DataControllerListener.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/listener/DataControllerListener.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ContactDataController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/controller/ContactDataController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.6144019">
-              <caret line="19" column="29" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1771#1869#0" expanded="true" />
-                <element signature="e#1868#1869#0" expanded="true" />
-                <element signature="e#2127#2216#0" expanded="true" />
-                <element signature="e#2215#2216#0" expanded="true" />
-                <element signature="e#2489#2575#0" expanded="true" />
-                <element signature="e#2574#2575#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UniDataController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/controller/pub/UniDataController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/MainActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="58" column="32" selection-start-line="58" selection-start-column="32" selection-end-line="58" selection-end-column="32" />
-              <folding>
-                <element signature="e#854#855#0" expanded="true" />
-                <element signature="e#910#911#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="App.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/Entity/App.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.2">
-              <caret line="79" column="28" selection-start-line="79" selection-start-column="28" selection-end-line="79" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Contact.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/Entity/Contact.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.966667">
-              <caret line="69" column="28" selection-start-line="69" selection-start-column="28" selection-end-line="69" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -1847,9 +1718,10 @@
         <option value="$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/listener/DataControllerListener.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/controller/ContactDataController.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/controller/AppDataController.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/data/center/UniDataCenter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/data/center/DataCenter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/controller/pub/UniDataController.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/listener/UniDataCenterListener.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/data/center/DataCenter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/data/center/UniDataCenter.java" />
       </list>
     </option>
   </component>
@@ -2594,7 +2466,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2935,7 +2807,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="1.28223">
           <caret line="58" column="32" selection-start-line="58" selection-start-column="32" selection-end-line="58" selection-end-column="32" />
           <folding>
             <element signature="e#854#855#0" expanded="true" />
@@ -2944,49 +2816,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/listener/DataControllerListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/controller/DataController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/controller/AbstractDataController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.18699187">
           <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/controller/pub/UniDataController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/data/center/DataCenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="42" selection-start-line="13" selection-start-column="42" selection-end-line="13" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3008,7 +2842,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/controller/ContactDataController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.6144019">
+        <state vertical-scroll-proportion="0.50754935">
           <caret line="19" column="29" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -3018,6 +2852,88 @@
             <element signature="e#2215#2216#0" expanded="true" />
             <element signature="e#2489#2575#0" expanded="true" />
             <element signature="e#2574#2575#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/controller/DataController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4541231">
+          <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/controller/pub/UniDataController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49245062">
+          <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/listener/DataControllerListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29384437">
+          <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/listener/UniDataCenterListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21370499">
+          <caret line="8" column="90" selection-start-line="8" selection-start-column="90" selection-end-line="8" selection-end-column="90" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/data/center/DataCenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="65" selection-start-line="18" selection-start-column="65" selection-end-line="18" selection-end-column="65" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/uncle/lee/simpledatasource/data/center/UniDataCenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="4.033682">
+          <caret line="151" column="61" selection-start-line="151" selection-start-column="61" selection-end-line="151" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#772#773#0" expanded="true" />
+            <element signature="e#833#834#0" expanded="true" />
+            <element signature="e#1447#1829#0" expanded="true" />
+            <element signature="e#1828#1829#0" expanded="true" />
+            <element signature="e#2110#2377#0" expanded="true" />
+            <element signature="e#2376#2377#0" expanded="true" />
+            <element signature="e#2540#2916#0" expanded="true" />
+            <element signature="e#2915#2916#0" expanded="true" />
+            <element signature="e#3037#3038#0" expanded="true" />
+            <element signature="e#3079#3080#0" expanded="true" />
+            <element signature="e#3174#3502#0" expanded="true" />
+            <element signature="e#3501#3502#0" expanded="true" />
+            <element signature="e#3856#4214#0" expanded="true" />
+            <element signature="e#4213#4214#0" expanded="true" />
+            <element signature="e#4313#4314#0" expanded="true" />
+            <element signature="e#4347#4348#0" expanded="true" />
+            <element signature="e#4404#4405#0" expanded="true" />
+            <element signature="e#4440#4441#0" expanded="true" />
+            <element signature="e#4540#4787#0" expanded="true" />
+            <element signature="e#4786#4787#0" expanded="true" />
+            <element signature="e#4930#5282#0" expanded="true" />
+            <element signature="e#5281#5282#0" expanded="true" />
+            <element signature="e#5419#5662#0" expanded="true" />
+            <element signature="e#5661#5662#0" expanded="true" />
+            <element signature="e#5778#5779#0" expanded="true" />
+            <element signature="e#5812#5813#0" expanded="true" />
           </folding>
         </state>
       </provider>
