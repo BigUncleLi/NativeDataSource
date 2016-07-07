@@ -1,6 +1,7 @@
 package org.uncle.lee.simpledatasource.data.center;
 
 import android.content.Context;
+import java.util.Collections;
 import java.util.List;
 import org.uncle.lee.simpledatasource.Entity.App;
 import org.uncle.lee.simpledatasource.Entity.Contact;
@@ -17,6 +18,8 @@ public class UniDataCenter implements DataCenter {
   private UniDataController uniDataController;
   private List<Contact> cacheContactList;
   private List<App> cacheAppList;
+  private List<Contact> contactTemp;
+  private List<App> appTemp;
 
   private UniDataCenter(Context mContext){
     uniDataController = new UniDataController(mContext);
@@ -24,7 +27,7 @@ public class UniDataCenter implements DataCenter {
 
   public static UniDataCenter getInstance(Context mContext){
     if(uniDataCenter == null){
-      synchronized (uniDataCenter.getClass()){
+      synchronized (UniDataCenter.class){
         if(uniDataCenter == null){
           uniDataCenter = new UniDataCenter(mContext);
         }
@@ -33,7 +36,7 @@ public class UniDataCenter implements DataCenter {
     return uniDataCenter;
   }
 
-  @Override public void getContactList() {
+  @Override public void queryContactList() {
     if(cacheContactList ==  null){
       queryContactInFirstTime();
     }else {
@@ -53,15 +56,16 @@ public class UniDataCenter implements DataCenter {
     uniDataController.contactDao().queryAll();
   }
 
-  @Override public void setContactList(List<Contact> contactList) {
+  @Override public void insertContactList(List<Contact> contactList) {
     cleanContactAndInsert(contactList);
   }
 
   private void cleanContactAndInsert(List<Contact> contactList) {
+    this.contactTemp = contactList;
     uniDataController.contactDao().setListener(new DataControllerListener<Contact>() {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<Contact> contacts) {
         if(Type.equals(ActionType.CLEAN_DONE) && isSuccess){
-          startInsertContactList(contacts);
+          startInsertContactList(contactTemp);
         }
       }
     });
@@ -69,11 +73,12 @@ public class UniDataCenter implements DataCenter {
   }
 
   private void startInsertContactList(List<Contact> contacts) {
+    this.contactTemp = contacts;
     uniDataController.contactDao().setListener(new DataControllerListener<Contact>() {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<Contact> contacts) {
         if(Type.equals(ActionType.INSERT_DONE) && isSuccess){
-          UniDataCenter.this.listener.onAction(UniDataCenterListener.ActionType.INSERT_DONE, true, contacts);
-          saveCacheContactList(contacts);
+          UniDataCenter.this.listener.onAction(UniDataCenterListener.ActionType.INSERT_DONE, true, null);
+          saveCacheContactList(contactTemp);
         }
       }
     });
@@ -89,13 +94,14 @@ public class UniDataCenter implements DataCenter {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<Contact> contacts) {
         if(Type.equals(ActionType.CLEAN_DONE) && isSuccess){
           UniDataCenter.this.listener.onAction(UniDataCenterListener.ActionType.CLEAN_DONE, true, null);
+          saveCacheContactList(Collections.<Contact>emptyList());
         }
       }
     });
     uniDataController.contactDao().clean();
   }
 
-  @Override public void getAppList() {
+  @Override public void queryAppList() {
     if(cacheAppList == null){
       queryAppInFirstTime();
     }else {
@@ -119,15 +125,16 @@ public class UniDataCenter implements DataCenter {
     this.cacheAppList = apps;
   }
 
-  @Override public void setAppList(List<App> appList) {
+  @Override public void insertAppList(List<App> appList) {
     cleanAppAndInsert(appList);
   }
 
   private void cleanAppAndInsert(List<App> appList) {
+    this.appTemp = appList;
     uniDataController.appDao().setListener(new DataControllerListener<App>() {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<App> apps) {
         if(Type.equals(ActionType.CLEAN_DONE) && isSuccess){
-          startInsertAppList(apps);
+          startInsertAppList(appTemp);
         }
       }
     });
@@ -135,11 +142,12 @@ public class UniDataCenter implements DataCenter {
   }
 
   private void startInsertAppList(List<App> apps) {
+    this.appTemp = apps;
     uniDataController.appDao().setListener(new DataControllerListener<App>() {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<App> apps) {
         if(Type.equals(ActionType.INSERT_DONE) && isSuccess){
-          UniDataCenter.this.listener.onAction(UniDataCenterListener.ActionType.INSERT_DONE, true, apps);
-          saveCacheAppList(apps);
+          UniDataCenter.this.listener.onAction(UniDataCenterListener.ActionType.INSERT_DONE, true, null);
+          saveCacheAppList(appTemp);
         }
       }
     });
@@ -150,6 +158,7 @@ public class UniDataCenter implements DataCenter {
     uniDataController.appDao().setListener(new DataControllerListener<App>() {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<App> apps) {
         UniDataCenter.this.listener.onAction(UniDataCenterListener.ActionType.CLEAN_DONE, true, null);
+        saveCacheAppList(Collections.<App>emptyList());
       }
     });
     uniDataController.appDao().clean();

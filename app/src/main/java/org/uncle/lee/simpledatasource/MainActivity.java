@@ -1,6 +1,5 @@
 package org.uncle.lee.simpledatasource;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,22 +9,23 @@ import java.util.ArrayList;
 import java.util.List;
 import org.uncle.lee.simpledatasource.Entity.App;
 import org.uncle.lee.simpledatasource.Entity.Contact;
-import org.uncle.lee.simpledatasource.controller.pub.UniDataController;
+import org.uncle.lee.simpledatasource.data.center.UniDataCenter;
+import org.uncle.lee.simpledatasource.listener.UniDataCenterListener;
 
 public class MainActivity extends AppCompatActivity {
   public static final String TAG = "uniDatabase";
-  private UniDataController instance;
+  private UniDataCenter instance;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
     initView();
-    initUniDataController();
+    initUniDataCenter();
   }
 
-  private void initUniDataController() {
-    instance = UniDataController.getInstance(this);
+  private void initUniDataCenter() {
+    instance = UniDataCenter.getInstance(this);
   }
 
   private void initView() {
@@ -49,24 +49,33 @@ public class MainActivity extends AppCompatActivity {
       switch(v.getId()){
         case R.id.bt_insert_app:
           Log.d(TAG, "insert start ... ");
-          instance.appDao().insert(createAppList());
+          insertApps(createAppList());
           Log.d(TAG, "insert finish ... ");
           break;
         case R.id.bt_query_apps:
-          List<App> apps = instance.appDao().queryAll();
-          show(apps);
+          Log.d(TAG, "query app start ... ");
+          queryApps();
+          Log.d(TAG, "query app finish ... ");
           break;
         case R.id.bt_clean_apps:
-          instance.appDao().clean();
+          Log.d(TAG, "clean app start ... ");
+          cleanApps();
+          Log.d(TAG, "clean app finish ... ");
           break;
         case R.id.bt_insert_contact:
-          instance.contactDao().insert(new Contact(null,"contactA", "pycontact", "10086"));
+          Log.d(TAG, "insert contact start ... ");
+          insertContact(createContactList());
+          Log.d(TAG, "insert contact finish ... ");
           break;
         case R.id.bt_query_contacts:
-          show(instance.contactDao().queryAll());
+          Log.d(TAG, "query contacts start ... ");
+          queryContact();
+          Log.d(TAG, "query contacts finish ... ");
           break;
         case R.id.bt_clean_contacts:
-          instance.contactDao().clean();
+          Log.d(TAG, "clean contacts start ... ");
+          cleanContact();
+          Log.d(TAG, "clean contacts finish ... ");
           break;
       }
     }
@@ -78,12 +87,87 @@ public class MainActivity extends AppCompatActivity {
     }
   };
 
+  private void cleanContact() {
+    instance.setListener(new UniDataCenterListener() {
+      @Override public void onAction(ActionType actionType, boolean isSuccess, List<?> dataList) {
+        if(actionType.equals(ActionType.CLEAN_DONE) && isSuccess){
+          Log.d(TAG, "clean done");
+        }
+      }
+    });
+    instance.cleanContactList();
+  }
+
+  private void queryContact() {
+    instance.setListener(new UniDataCenterListener() {
+      @Override public void onAction(ActionType actionType, boolean isSuccess, List<?> dataList) {
+        if(actionType.equals(ActionType.QUERY_ALL_DONE) && isSuccess){
+          Log.d(TAG, "contact number : " + dataList.size());
+        }
+      }
+    });
+    instance.queryContactList();
+  }
+
+  private void insertContact(List<Contact> contactList) {
+    instance.setListener(new UniDataCenterListener() {
+      @Override public void onAction(ActionType actionType, boolean isSuccess, List<?> dataList) {
+        if(actionType.equals(ActionType.QUERY_ALL_DONE) && isSuccess){
+          Log.d(TAG, "insert done");
+        }
+      }
+    });
+    instance.insertContactList(contactList);
+  }
+
+  private void cleanApps() {
+    instance.setListener(new UniDataCenterListener() {
+      @Override public void onAction(ActionType actionType, boolean isSuccess, List<?> dataList) {
+        if(actionType.equals(ActionType.CLEAN_DONE) && isSuccess){
+          Log.d(TAG, "clean done");
+        }
+      }
+    });
+    instance.cleanAppList();
+  }
+
+  private void queryApps() {
+    instance.setListener(new UniDataCenterListener() {
+      @Override public void onAction(ActionType actionType, boolean isSuccess, List<?> dataList) {
+        if(actionType.equals(ActionType.QUERY_ALL_DONE) && isSuccess){
+          Log.d(TAG, "app number : " + dataList.size());
+        }
+      }
+    });
+    instance.queryAppList();
+  }
+
+  private void insertApps(List<App> appList) {
+    instance.setListener(new UniDataCenterListener() {
+      @Override public void onAction(ActionType actionType, boolean isSuccess, List<?> dataList) {
+        if(actionType.equals(ActionType.INSERT_DONE) && isSuccess){
+          Log.d(TAG, "insert apps done");
+        }
+      }
+    });
+    instance.insertAppList(appList);
+  }
+
   private List<App> createAppList() {
     List<App> appList = new ArrayList<App>();
-    for(int i = 0; i < 1000; i++){
+    for(int i = 0; i < 10; i++){
       App app = new App(null, "app" + i, "applabe" + i, "pyLabe" + i, "className" + i);
       appList.add(app);
     }
     return appList;
+  }
+
+  private List<Contact> createContactList() {
+    List<Contact> contactList = new ArrayList<Contact>();
+    for(int i = 0; i < 10; i++){
+      Contact contact = new Contact(null, "name" + i, "pyName" + i, "10086");
+      contactList.add(contact);
+    }
+    return contactList;
   }
 }

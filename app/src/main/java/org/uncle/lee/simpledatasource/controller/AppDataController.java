@@ -1,6 +1,7 @@
 package org.uncle.lee.simpledatasource.controller;
 
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import org.uncle.lee.simpledatasource.Entity.App;
@@ -13,6 +14,8 @@ import org.uncle.lee.simpledatasource.listener.DataControllerListener;
  * Created by Austin on 2016/7/6.
  */
 public class AppDataController extends AbstractDataController<App, String> {
+  public static final String TAG = AppDataController.class.getSimpleName();
+
   private DataControllerListener<App> listener;
   private ExecutorService threadPool;
   private AppDao readAppDao;
@@ -49,6 +52,7 @@ public class AppDataController extends AbstractDataController<App, String> {
   }
 
   private synchronized void insertSyn(App app) {
+    Log.d(TAG, "insert syn...");
     writeAppDao.insert(app);
     this.listener.onAction(DataControllerListener.ActionType.INSERT_DONE, true, null);
   }
@@ -62,6 +66,7 @@ public class AppDataController extends AbstractDataController<App, String> {
   }
 
   private synchronized void queryAllSyn() {
+    Log.d(TAG, "query syn...");
     List<App> appList = readAppDao.loadAll();
     this.listener.onAction(DataControllerListener.ActionType.QUERY_ALL_DONE, true, appList);
   }
@@ -75,6 +80,7 @@ public class AppDataController extends AbstractDataController<App, String> {
   }
 
   private synchronized void cleanSyn() {
+    Log.d(TAG, "clean syn...");
     writeAppDao.deleteAll();
     this.listener.onAction(DataControllerListener.ActionType.CLEAN_DONE, true, null);
   }
