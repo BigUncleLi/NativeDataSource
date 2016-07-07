@@ -3,8 +3,8 @@ package org.uncle.lee.simpledatasource.controller;
 import android.content.Context;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import org.uncle.lee.simpledatasource.Entity.App;
-import org.uncle.lee.simpledatasource.Entity.Contact;
+import org.uncle.lee.simpledatasource.Entity.in.App;
+import org.uncle.lee.simpledatasource.Entity.in.Contact;
 import org.uncle.lee.simpledatasource.dao.DaoMaster;
 
 /**

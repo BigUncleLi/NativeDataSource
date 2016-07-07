@@ -3,7 +3,7 @@ package org.uncle.lee.simpledatasource.controller;
 import android.database.sqlite.SQLiteDatabase;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
-import org.uncle.lee.simpledatasource.Entity.Contact;
+import org.uncle.lee.simpledatasource.Entity.in.Contact;
 import org.uncle.lee.simpledatasource.dao.ContactDao;
 import org.uncle.lee.simpledatasource.dao.DaoMaster;
 import org.uncle.lee.simpledatasource.dao.DaoSession;

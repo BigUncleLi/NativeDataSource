@@ -4,7 +4,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
-import org.uncle.lee.simpledatasource.Entity.App;
+import org.uncle.lee.simpledatasource.Entity.in.App;
 import org.uncle.lee.simpledatasource.dao.AppDao;
 import org.uncle.lee.simpledatasource.dao.DaoMaster;
 import org.uncle.lee.simpledatasource.dao.DaoSession;

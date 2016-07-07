@@ -1,4 +1,4 @@
-package org.uncle.lee.simpledatasource.Entity;
+package org.uncle.lee.simpledatasource.Entity.in;
 
 import org.greenrobot.greendao.annotation.*;
 

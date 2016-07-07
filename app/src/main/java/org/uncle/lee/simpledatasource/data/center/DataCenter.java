@@ -1,8 +1,8 @@
 package org.uncle.lee.simpledatasource.data.center;
 
 import java.util.List;
-import org.uncle.lee.simpledatasource.Entity.App;
-import org.uncle.lee.simpledatasource.Entity.Contact;
+import org.uncle.lee.simpledatasource.Entity.in.App;
+import org.uncle.lee.simpledatasource.Entity.in.Contact;
 import org.uncle.lee.simpledatasource.listener.UniDataCenterListener;
 
 /**

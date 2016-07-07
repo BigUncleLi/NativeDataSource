@@ -3,8 +3,8 @@ package org.uncle.lee.simpledatasource.data.center;
 import android.content.Context;
 import java.util.Collections;
 import java.util.List;
-import org.uncle.lee.simpledatasource.Entity.App;
-import org.uncle.lee.simpledatasource.Entity.Contact;
+import org.uncle.lee.simpledatasource.Entity.in.App;
+import org.uncle.lee.simpledatasource.Entity.in.Contact;
 import org.uncle.lee.simpledatasource.controller.UniDataController;
 import org.uncle.lee.simpledatasource.listener.DataControllerListener;
 import org.uncle.lee.simpledatasource.listener.UniDataCenterListener;
@@ -16,13 +16,13 @@ public class UniDataCenter implements DataCenter {
   private static UniDataCenter uniDataCenter;
   private UniDataCenterListener listener;
   private UniDataController uniDataController;
-  private List<Contact> cacheContactList;
-  private List<App> cacheAppList;
+  private CacheData cacheData;
   private List<Contact> contactTemp;
   private List<App> appTemp;
 
   private UniDataCenter(Context mContext){
     uniDataController = new UniDataController(mContext);
+    cacheData = new CacheData();
   }
 
   public static UniDataCenter getInstance(Context mContext){
@@ -37,10 +37,10 @@ public class UniDataCenter implements DataCenter {
   }
 
   @Override public void queryContactList() {
-    if(cacheContactList ==  null){
+    if(cacheData.cacheContactList() ==  null){
       queryContactInFirstTime();
     }else {
-      this.listener.onAction(UniDataCenterListener.ActionType.QUERY_ALL_DONE, true, cacheContactList);
+      this.listener.onAction(UniDataCenterListener.ActionType.QUERY_ALL_DONE, true, cacheData.cacheContactList());
     }
   }
 
@@ -86,7 +86,7 @@ public class UniDataCenter implements DataCenter {
   }
 
   private void saveCacheContactList(List<Contact> contacts) {
-    this.cacheContactList = contacts;
+    cacheData.saveCacheContactList(contacts);
   }
 
   @Override public void cleanContactList() {
@@ -102,10 +102,10 @@ public class UniDataCenter implements DataCenter {
   }
 
   @Override public void queryAppList() {
-    if(cacheAppList == null){
+    if(cacheData.cacheAppList() == null){
       queryAppInFirstTime();
     }else {
-      this.listener.onAction(UniDataCenterListener.ActionType.QUERY_ALL_DONE, true, cacheAppList);
+      this.listener.onAction(UniDataCenterListener.ActionType.QUERY_ALL_DONE, true, cacheData.cacheAppList());
     }
   }
 
@@ -122,7 +122,7 @@ public class UniDataCenter implements DataCenter {
   }
 
   private void saveCacheAppList(List<App> apps) {
-    this.cacheAppList = apps;
+    cacheData.saveCacheAppList(apps);
   }
 
   @Override public void insertAppList(List<App> appList) {
