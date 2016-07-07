@@ -13,7 +13,7 @@ import org.uncle.lee.simpledatasource.listener.DataControllerListener;
 /**
  * Created by Austin on 2016/7/6.
  */
-public class AppDataController extends AbstractDataController<App, String> {
+public class AppDataController implements DataController<App, String> {
   public static final String TAG = AppDataController.class.getSimpleName();
 
   private DataControllerListener<App> listener;
@@ -21,6 +21,7 @@ public class AppDataController extends AbstractDataController<App, String> {
   private AppDao readAppDao;
   private AppDao writeAppDao;
   private App appTemp;
+  private List<App> appListTemp;
 
   public AppDataController(DaoMaster.DevOpenHelper devOpenHelper, ExecutorService threadPool) {
     this.threadPool = threadPool;
@@ -57,10 +58,25 @@ public class AppDataController extends AbstractDataController<App, String> {
     this.listener.onAction(DataControllerListener.ActionType.INSERT_DONE, true, null);
   }
 
+  @Override public void insert(List<App> apps) {
+    this.appListTemp = apps;
+    this.threadPool.submit(new Runnable() {
+      @Override public void run() {
+        insertSyn(appListTemp);
+      }
+    });
+  }
+
+  private synchronized void insertSyn(List<App> apps){
+    Log.d(TAG, "insert list syn...");
+    writeAppDao.insertInTx(apps);
+    this.listener.onAction(DataControllerListener.ActionType.INSERT_DONE, true, null);
+  }
+
   @Override public void queryAll() {
     this.threadPool.submit(new Runnable() {
       @Override public void run() {
-        queryAll();
+        queryAllSyn();
       }
     });
   }

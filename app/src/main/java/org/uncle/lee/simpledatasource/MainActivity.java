@@ -14,6 +14,7 @@ import org.uncle.lee.simpledatasource.listener.UniDataCenterListener;
 
 public class MainActivity extends AppCompatActivity {
   public static final String TAG = "uniDatabase";
+  public static final int MAX_NUMBER = 10000;
   private UniDataCenter instance;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
   private void insertContact(List<Contact> contactList) {
     instance.setListener(new UniDataCenterListener() {
       @Override public void onAction(ActionType actionType, boolean isSuccess, List<?> dataList) {
-        if(actionType.equals(ActionType.QUERY_ALL_DONE) && isSuccess){
+        if(actionType.equals(ActionType.INSERT_DONE) && isSuccess){
           Log.d(TAG, "insert done");
         }
       }
@@ -155,8 +156,8 @@ public class MainActivity extends AppCompatActivity {
 
   private List<App> createAppList() {
     List<App> appList = new ArrayList<App>();
-    for(int i = 0; i < 10; i++){
-      App app = new App(null, "app" + i, "applabe" + i, "pyLabe" + i, "className" + i);
+    for(int i = 0; i < MAX_NUMBER; i++){
+      App app = new App(null, "app" + i, "applabe" + i, "pyLabe" + i, "className" + i, "nickName" + i);
       appList.add(app);
     }
     return appList;
@@ -164,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
 
   private List<Contact> createContactList() {
     List<Contact> contactList = new ArrayList<Contact>();
-    for(int i = 0; i < 10; i++){
+    for(int i = 0; i < MAX_NUMBER; i++){
       Contact contact = new Contact(null, "name" + i, "pyName" + i, "10086");
       contactList.add(contact);
     }

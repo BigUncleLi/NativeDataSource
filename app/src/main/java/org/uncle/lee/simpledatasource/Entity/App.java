@@ -17,6 +17,7 @@ public class App {
     private String appLabel;
     private String appPyLabel;
     private String className;
+    private String nickName;
 
     @Generated
     public App() {
@@ -27,12 +28,13 @@ public class App {
     }
 
     @Generated
-    public App(Long id, String packageName, String appLabel, String appPyLabel, String className) {
+    public App(Long id, String packageName, String appLabel, String appPyLabel, String className, String nickName) {
         this.id = id;
         this.packageName = packageName;
         this.appLabel = appLabel;
         this.appPyLabel = appPyLabel;
         this.className = className;
+        this.nickName = nickName;
     }
 
     public Long getId() {
@@ -77,6 +79,14 @@ public class App {
         this.className = className;
     }
 
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
     @Override public String toString() {
         return "App{" +
             "id=" + id +
@@ -84,6 +94,7 @@ public class App {
             ", appLabel='" + appLabel + '\'' +
             ", appPyLabel='" + appPyLabel + '\'' +
             ", className='" + className + '\'' +
+            ", nickName='" + nickName + '\'' +
             '}';
     }
 }

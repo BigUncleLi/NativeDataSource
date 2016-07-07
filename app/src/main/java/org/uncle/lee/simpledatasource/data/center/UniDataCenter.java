@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import org.uncle.lee.simpledatasource.Entity.App;
 import org.uncle.lee.simpledatasource.Entity.Contact;
-import org.uncle.lee.simpledatasource.controller.pub.UniDataController;
+import org.uncle.lee.simpledatasource.controller.UniDataController;
 import org.uncle.lee.simpledatasource.listener.DataControllerListener;
 import org.uncle.lee.simpledatasource.listener.UniDataCenterListener;
 

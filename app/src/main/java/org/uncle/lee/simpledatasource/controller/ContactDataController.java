@@ -12,12 +12,13 @@ import org.uncle.lee.simpledatasource.listener.DataControllerListener;
 /**
  * Created by Austin on 2016/7/6.
  */
-public class ContactDataController extends AbstractDataController<Contact, String> {
+public class ContactDataController implements DataController<Contact, String> {
   private DataControllerListener<Contact> listener;
   private ExecutorService threadPool;
   private ContactDao readContactDao;
   private ContactDao writeContactDao;
   private Contact contactTemp;
+  private List<Contact> contactListTemp;
 
   public ContactDataController(DaoMaster.DevOpenHelper devOpenHelper, ExecutorService threadPool) {
     this.threadPool = threadPool;
@@ -50,6 +51,20 @@ public class ContactDataController extends AbstractDataController<Contact, Strin
 
   private synchronized void insertSyn(Contact contact) {
     writeContactDao.insert(contact);
+    this.listener.onAction(DataControllerListener.ActionType.INSERT_DONE, true, null);
+  }
+
+  @Override public void insert(List<Contact> contacts) {
+    this.contactListTemp = contacts;
+    this.threadPool.submit(new Runnable() {
+      @Override public void run() {
+        insertSyn(contactListTemp);
+      }
+    });
+  }
+
+  private synchronized void insertSyn(List<Contact> contacts){
+    writeContactDao.insertInTx(contacts);
     this.listener.onAction(DataControllerListener.ActionType.INSERT_DONE, true, null);
   }
 

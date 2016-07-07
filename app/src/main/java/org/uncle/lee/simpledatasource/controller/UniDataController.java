@@ -1,13 +1,10 @@
-package org.uncle.lee.simpledatasource.controller.pub;
+package org.uncle.lee.simpledatasource.controller;
 
 import android.content.Context;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.uncle.lee.simpledatasource.Entity.App;
 import org.uncle.lee.simpledatasource.Entity.Contact;
-import org.uncle.lee.simpledatasource.controller.AppDataController;
-import org.uncle.lee.simpledatasource.controller.ContactDataController;
-import org.uncle.lee.simpledatasource.controller.DataController;
 import org.uncle.lee.simpledatasource.dao.DaoMaster;
 
 /**
