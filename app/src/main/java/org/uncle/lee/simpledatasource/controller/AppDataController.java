@@ -101,6 +101,9 @@ public class AppDataController implements DataController<App, String> {
     this.listener.onAction(DataControllerListener.ActionType.CLEAN_DONE, true, null);
   }
 
+  public void queryByName(String name){}
+  public void queryById(String id){}
+
   @Override public void setListener(DataControllerListener<App> listener) {
     this.listener = listener;
   }

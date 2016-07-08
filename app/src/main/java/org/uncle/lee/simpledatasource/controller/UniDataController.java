@@ -14,21 +14,27 @@ public class UniDataController {
   private static UniDataController dataController;
   private DataController<Contact, String> contactDao;
   private DataController<App, String> appDao;
+  private CacheDataController cacheDataController;
 
-  public UniDataController(Context mContext){
+  public UniDataController(Context mContext) {
     DaoMaster.DevOpenHelper devOpenHelper =
         new DaoMaster.DevOpenHelper(mContext, DataController.DATABASE_NAME, null);
     ExecutorService threadPool = Executors.newCachedThreadPool();
 
     appDao = new AppDataController(devOpenHelper, threadPool);
     contactDao = new ContactDataController(devOpenHelper, threadPool);
+    cacheDataController = new CacheDataController(threadPool);
   }
 
-  public DataController<Contact, String> contactDao() {
+  public DataController<Contact, String> contactDataController() {
     return contactDao;
   }
 
-  public DataController<App, String> appDao() {
+  public DataController<App, String> appDataController() {
     return appDao;
+  }
+
+  public CacheDataController cacheDataController() {
+    return cacheDataController;
   }
 }

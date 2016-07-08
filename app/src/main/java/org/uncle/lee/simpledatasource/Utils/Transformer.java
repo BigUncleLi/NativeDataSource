@@ -13,13 +13,14 @@ import org.uncle.lee.simpledatasource.Utils.pinyin.pinyin4j.PinYin4j;
  * Created by Austin on 2016/7/7.
  */
 public class Transformer {
-  public static List<UniApp> transformUniApp(List<App> appList){
-    List<UniApp> uniAppList = new ArrayList<UniApp>();
-    for(App app : appList){
+  public static List<UniApp> transformUniApp(List<UniApp> originUniAppList, List<App> newAppList){
+    for(App app : newAppList){
       UniApp uniApp = transform2Uniapp(app);
-      uniAppList.add(uniApp);
+      originUniAppList.add(uniApp);
+      app = null;
+      uniApp = null;
     }
-    return uniAppList;
+    return originUniAppList;
   }
 
   private static UniApp transform2Uniapp(App app) {
@@ -33,13 +34,13 @@ public class Transformer {
   public static List<UniContact> transformUniContact(List<Contact> contactList){
     List<UniContact> uniContactList = new ArrayList<UniContact>();
     for(Contact contact : contactList){
-      UniContact uniContact = transform2Unicontact(contact, contactList);
+      UniContact uniContact = createUniContact(contact, contactList);
       uniContactList.add(uniContact);
     }
     return uniContactList;
   }
 
-  private static UniContact transform2Unicontact(Contact contact, List<Contact> contactList) {
+  private static UniContact createUniContact(Contact contact, List<Contact> contactList) {
     UniContact uniContact = new UniContact();
     uniContact.setContactName(contact.getName());
     uniContact.setContactNamePinYin(contact.getPy());
@@ -61,11 +62,8 @@ public class Transformer {
     return numberList;
   }
 
+  @Deprecated
   public static List<App> addPyForApp(Context mContext, List<App> appList){
-    /*for(App app : appList){
-      app.setId(null);
-      app.setAppPyLabel(transform2Py(mContext, app.getAppLabel()));
-    }*/
     return appList;
   }
 
