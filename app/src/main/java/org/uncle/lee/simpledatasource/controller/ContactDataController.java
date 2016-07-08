@@ -17,8 +17,6 @@ public class ContactDataController implements DataController<Contact, String> {
   private ExecutorService threadPool;
   private ContactDao readContactDao;
   private ContactDao writeContactDao;
-  private Contact contactTemp;
-  private List<Contact> contactListTemp;
 
   public ContactDataController(DaoMaster.DevOpenHelper devOpenHelper, ExecutorService threadPool) {
     this.threadPool = threadPool;
@@ -40,11 +38,10 @@ public class ContactDataController implements DataController<Contact, String> {
     return daoSession.getContactDao();
   }
 
-  @Override public void insert(Contact contact) {
-    this.contactTemp = contact;
+  @Override public void insert(final Contact contact) {
     this.threadPool.submit(new Runnable() {
       @Override public void run() {
-        insertSyn(contactTemp);
+        insertSyn(contact);
       }
     });
   }
@@ -54,11 +51,10 @@ public class ContactDataController implements DataController<Contact, String> {
     this.listener.onAction(DataControllerListener.ActionType.INSERT_DONE, true, null);
   }
 
-  @Override public void insert(List<Contact> contacts) {
-    this.contactListTemp = contacts;
+  @Override public void insert(final List<Contact> contacts) {
     this.threadPool.submit(new Runnable() {
       @Override public void run() {
-        insertSyn(contactListTemp);
+        insertSyn(contacts);
       }
     });
   }

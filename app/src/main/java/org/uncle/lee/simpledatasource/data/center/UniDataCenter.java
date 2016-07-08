@@ -21,8 +21,6 @@ public class UniDataCenter implements DataCenter {
   private UniDataCenterListener listener;
   private UniDataController uniDataController;
   private Context mContext;
-  private List<Contact> contactTemp;
-  private List<App> appTemp;
 
   private UniDataCenter(Context mContext){
     this.mContext = mContext;
@@ -66,12 +64,13 @@ public class UniDataCenter implements DataCenter {
   }
 
   @Override public void insertContactList(List<Contact> contactList) {
-    this.contactTemp = new Transformer().addPyForContact(mContext, contactList);
+    contactList = new Transformer().addPyForContact(mContext, contactList);
+    final List<Contact> finalContactList = contactList;
     uniDataController.contactDataController().setListener(new DataControllerListener<Contact>() {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<Contact> contacts) {
         if(Type.equals(ActionType.INSERT_DONE) && isSuccess){
           UniDataCenter.this.listener.onAction(UniDataCenterListener.ActionType.INSERT_DONE, true, null);
-          saveCacheContactList(contactTemp, CacheDataController.SaveType.TYPE_ADD);
+          saveCacheContactList(finalContactList, CacheDataController.SaveType.TYPE_ADD);
         }
       }
     });
@@ -125,14 +124,13 @@ public class UniDataCenter implements DataCenter {
     uniDataController.cacheDataController().saveCacheAppList(apps, saveType);
   }
 
-  @Override public void insertAppList(List<App> appList) {
+  @Override public void insertAppList(final List<App> appList) {
     // app don't need to get py params(this part is too wasting time)
-    this.appTemp = appList;
     uniDataController.appDataController().setListener(new DataControllerListener<App>() {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<App> apps) {
         if(Type.equals(ActionType.INSERT_DONE) && isSuccess){
           UniDataCenter.this.listener.onAction(UniDataCenterListener.ActionType.INSERT_DONE, true, null);
-          saveCacheAppList(appTemp, CacheDataController.SaveType.TYPE_ADD);
+          saveCacheAppList(appList, CacheDataController.SaveType.TYPE_ADD);
         }
       }
     });

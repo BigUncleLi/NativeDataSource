@@ -20,8 +20,6 @@ public class AppDataController implements DataController<App, String> {
   private ExecutorService threadPool;
   private AppDao readAppDao;
   private AppDao writeAppDao;
-  private App appTemp;
-  private List<App> appListTemp;
 
   public AppDataController(DaoMaster.DevOpenHelper devOpenHelper, ExecutorService threadPool) {
     this.threadPool = threadPool;
@@ -43,11 +41,10 @@ public class AppDataController implements DataController<App, String> {
     return daoSession.getAppDao();
   }
 
-  @Override public void insert(App app) {
-    this.appTemp = app;
+  @Override public void insert(final App app) {
     this.threadPool.submit(new Runnable() {
       @Override public void run() {
-        insertSyn(appTemp);
+        insertSyn(app);
       }
     });
   }
@@ -58,11 +55,10 @@ public class AppDataController implements DataController<App, String> {
     this.listener.onAction(DataControllerListener.ActionType.INSERT_DONE, true, null);
   }
 
-  @Override public void insert(List<App> apps) {
-    this.appListTemp = apps;
+  @Override public void insert(final List<App> apps) {
     this.threadPool.submit(new Runnable() {
       @Override public void run() {
-        insertSyn(appListTemp);
+        insertSyn(apps);
       }
     });
   }

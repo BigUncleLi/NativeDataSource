@@ -1,8 +1,10 @@
 package org.uncle.lee.simpledatasource.Utils;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -39,43 +41,55 @@ public class Transformer {
     return uniApp;
   }
 
-  private List<UniContact> originUniContactList;
-
   public List<UniContact> transformUniContact(List<UniContact> originUniContactList,
       List<Contact> contactList) {
-    this.originUniContactList = originUniContactList;
-    transformUniContact(contactList);
-    return originUniContactList;
+    List<UniContact> newUniContactList = transform(contactList);
+    return combineOldAndNewUniContactList(originUniContactList, newUniContactList);
   }
 
-  private void transformUniContact(List<Contact> contactList) {
-    for (Contact contact : contactList) {
-      UniContact uniContact = createUniContact(contact, contactList);
-      this.originUniContactList.add(uniContact);
-      uniContact = null;
-      contact = null;
+  private List<UniContact> transform(List<Contact> contactList) {
+    List<UniContact> uniContactList = new ArrayList<UniContact>();
+    HashMap<String, UniContact> map = new HashMap<String, UniContact>();
+    for(Contact contact : contactList){
+      if(map.containsKey(contact.getName())){
+        UniContact uniContact = map.get(contact.getName());
+        uniContact.getContactPhoneNO().add(contact.getNumber());
+      }else{
+        UniContact uniContact = createUniContact(contact);
+        map.put(contact.getName(), uniContact);
+        uniContactList.add(uniContact);
+      }
     }
+    return uniContactList;
   }
 
-  private UniContact createUniContact(Contact contact, List<Contact> contactList) {
+  private List<UniContact> combineOldAndNewUniContactList(List<UniContact> originUniContactList,
+      List<UniContact> newUniContactList) {
+    originUniContactList.addAll(newUniContactList);
+    return combineMultiUniContact(originUniContactList);
+  }
+
+  private List<UniContact> combineMultiUniContact(List<UniContact> originUniContactList) {
+    HashMap<String, UniContact> map = new HashMap<String, UniContact>();
+    List<UniContact> newSingleUnicontactList = new ArrayList<UniContact>();
+    for(UniContact uniContact : originUniContactList){
+      if(map.containsKey(uniContact.getContactName())){
+        UniContact uniContactTemp = map.get(uniContact.getContactName());
+        uniContactTemp.getContactPhoneNO().addAll(uniContact.getContactPhoneNO());
+      }else {
+        map.put(uniContact.getContactName(), uniContact);
+        newSingleUnicontactList.add(uniContact);
+      }
+    }
+    return newSingleUnicontactList;
+  }
+
+  @NonNull private UniContact createUniContact(Contact contact) {
     UniContact uniContact = new UniContact();
     uniContact.setContactName(contact.getName());
     uniContact.setContactNamePinYin(contact.getPy());
-
+    uniContact.getContactPhoneNO().add(contact.getNumber());
     return uniContact;
-  }
-
-  private ArrayList<String> getNumberList(Contact contact, List<Contact> contactList,
-      UniContact uniContact) {
-    ArrayList<String> numberList = new ArrayList<String>();
-    numberList.add(contact.getNumber());
-    for (Contact contactItem : contactList) {
-      if (contactItem.getName().equals(uniContact.getContactName())) {
-        numberList.add(contactItem.getNumber());
-      }
-      contactItem = null;
-    }
-    return numberList;
   }
 
   @Deprecated public List<App> addPyForApp(Context mContext, List<App> appList) {
