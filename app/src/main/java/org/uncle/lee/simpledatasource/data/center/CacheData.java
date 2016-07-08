@@ -23,7 +23,7 @@ public class CacheData {
   }
 
   public void saveCacheContactList(List<Contact> contacts) {
-    outputContactList = Transformer.transformUniContact(contacts);
+    //outputContactList = Transformer.transformUniContact(contacts);
   }
 
   public List<UniApp> cacheAppList(){

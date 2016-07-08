@@ -60,23 +60,8 @@ public class UniDataCenter implements DataCenter {
   }
 
   @Override public void insertContactList(List<Contact> contactList) {
-    cleanContactAndInsert(contactList);
-  }
-
-  private void cleanContactAndInsert(List<Contact> contactList) {
     this.contactTemp = contactList;
-    uniDataController.contactDao().setListener(new DataControllerListener<Contact>() {
-      @Override public void onAction(ActionType Type, boolean isSuccess, List<Contact> contacts) {
-        if(Type.equals(ActionType.CLEAN_DONE) && isSuccess){
-          startInsertContactList(contactTemp);
-        }
-      }
-    });
-    uniDataController.contactDao().clean();
-  }
-
-  private void startInsertContactList(List<Contact> contacts) {
-    this.contactTemp = Transformer.addPyForContact(mContext, contacts);
+    //this.contactTemp = Transformer.addPyForContact(mContext, contactList);
     uniDataController.contactDao().setListener(new DataControllerListener<Contact>() {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<Contact> contacts) {
         if(Type.equals(ActionType.INSERT_DONE) && isSuccess){
@@ -85,7 +70,7 @@ public class UniDataCenter implements DataCenter {
         }
       }
     });
-    uniDataController.contactDao().insert(contacts);
+    uniDataController.contactDao().insert(contactList);
   }
 
   private void saveCacheContactList(List<Contact> contacts) {
@@ -129,24 +114,8 @@ public class UniDataCenter implements DataCenter {
   }
 
   @Override public void insertAppList(List<App> appList) {
-    cleanAppAndInsert(appList);
-  }
-
-  private void cleanAppAndInsert(List<App> appList) {
-    this.appTemp = appList;
-    uniDataController.appDao().setListener(new DataControllerListener<App>() {
-      @Override public void onAction(ActionType Type, boolean isSuccess, List<App> apps) {
-        if(Type.equals(ActionType.CLEAN_DONE) && isSuccess){
-          startInsertAppList(appTemp);
-        }
-      }
-    });
-    uniDataController.appDao().clean();
-  }
-
-  private void startInsertAppList(List<App> apps) {
     // app don't need to get py params(this part is too wasting time)
-    this.appTemp = apps;
+    this.appTemp = appList;
     uniDataController.appDao().setListener(new DataControllerListener<App>() {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<App> apps) {
         if(Type.equals(ActionType.INSERT_DONE) && isSuccess){
@@ -155,7 +124,7 @@ public class UniDataCenter implements DataCenter {
         }
       }
     });
-    uniDataController.appDao().insert(apps);
+    uniDataController.appDao().insert(appList);
   }
 
   @Override public void cleanAppList() {

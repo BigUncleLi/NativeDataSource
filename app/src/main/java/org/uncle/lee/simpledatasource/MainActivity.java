@@ -15,7 +15,7 @@ import org.uncle.lee.simpledatasource.listener.UniDataCenterListener;
 
 public class MainActivity extends AppCompatActivity {
   public static final String TAG = "uniDatabase";
-  public static final int MAX_NUMBER = 10000;
+  public static final int MAX_NUMBER = 3000;
   private UniDataCenter instance;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
