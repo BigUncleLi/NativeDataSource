@@ -145,7 +145,8 @@ public class UniDataCenter implements DataCenter {
   }
 
   private void startInsertAppList(List<App> apps) {
-    this.appTemp = Transformer.addPyForApp(mContext, apps);
+    // app don't need to get py params(this part is too wasting time)
+    this.appTemp = apps;
     uniDataController.appDao().setListener(new DataControllerListener<App>() {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<App> apps) {
         if(Type.equals(ActionType.INSERT_DONE) && isSuccess){

@@ -15,7 +15,7 @@ import org.uncle.lee.simpledatasource.listener.UniDataCenterListener;
 
 public class MainActivity extends AppCompatActivity {
   public static final String TAG = "uniDatabase";
-  public static final int MAX_NUMBER = 3000;
+  public static final int MAX_NUMBER = 10000;
   private UniDataCenter instance;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
@@ -52,32 +52,26 @@ public class MainActivity extends AppCompatActivity {
         case R.id.bt_insert_app:
           Log.d(TAG, "insert start ... ");
           insertApps(createAppList());
-          Log.d(TAG, "insert finish ... ");
           break;
         case R.id.bt_query_apps:
           Log.d(TAG, "query app start ... ");
           queryApps();
-          Log.d(TAG, "query app finish ... ");
           break;
         case R.id.bt_clean_apps:
           Log.d(TAG, "clean app start ... ");
           cleanApps();
-          Log.d(TAG, "clean app finish ... ");
           break;
         case R.id.bt_insert_contact:
           Log.d(TAG, "insert contact start ... ");
           insertContact(createContactList());
-          Log.d(TAG, "insert contact finish ... ");
           break;
         case R.id.bt_query_contacts:
           Log.d(TAG, "query contacts start ... ");
           queryContact();
-          Log.d(TAG, "query contacts finish ... ");
           break;
         case R.id.bt_clean_contacts:
           Log.d(TAG, "clean contacts start ... ");
           cleanContact();
-          Log.d(TAG, "clean contacts finish ... ");
           break;
       }
     }

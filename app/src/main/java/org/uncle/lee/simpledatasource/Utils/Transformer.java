@@ -62,10 +62,10 @@ public class Transformer {
   }
 
   public static List<App> addPyForApp(Context mContext, List<App> appList){
-    for(App app : appList){
+    /*for(App app : appList){
       app.setId(null);
       app.setAppPyLabel(transform2Py(mContext, app.getAppLabel()));
-    }
+    }*/
     return appList;
   }
 
