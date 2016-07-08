@@ -14,6 +14,7 @@ public class UniContact {
   private int photoId = 0;
   private int hasPhoneNumber = 0;
   private ArrayList<String> contactPhoneNO = new ArrayList<>();
+  private boolean isMultiMark = false;
 
   private List<String> spellWordsList;
 
@@ -91,5 +92,13 @@ public class UniContact {
 
   public void cleanPhone() {
     this.contactPhoneNO.clear();
+  }
+
+  public boolean isMultiMark() {
+    return isMultiMark;
+  }
+
+  public void setMultiMark(boolean multiMark) {
+    isMultiMark = multiMark;
   }
 }

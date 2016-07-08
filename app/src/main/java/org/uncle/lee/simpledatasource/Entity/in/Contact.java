@@ -16,6 +16,7 @@ public class Contact {
     private String name;
     private String py;
     private String number;
+    private Boolean isCheck;
 
     @Generated
     public Contact() {
@@ -25,12 +26,17 @@ public class Contact {
         this.id = id;
     }
 
+    public Contact(String name, String py, String number) {
+        this(null, name, py, number, false);
+    }
+
     @Generated
-    public Contact(Long id, String name, String py, String number) {
+    public Contact(Long id, String name, String py, String number, Boolean isCheck) {
         this.id = id;
         this.name = name;
         this.py = py;
         this.number = number;
+        this.isCheck = isCheck;
     }
 
     public Long getId() {
@@ -67,12 +73,12 @@ public class Contact {
         this.number = number;
     }
 
-    @Override public String toString() {
-        return "Contact{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
-            ", py='" + py + '\'' +
-            ", number='" + number + '\'' +
-            '}';
+    public Boolean getIsCheck() {
+        return isCheck;
     }
+
+    public void setIsCheck(Boolean isCheck) {
+        this.isCheck = isCheck;
+    }
+
 }

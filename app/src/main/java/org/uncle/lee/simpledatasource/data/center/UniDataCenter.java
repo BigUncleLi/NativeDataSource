@@ -6,6 +6,7 @@ import java.util.List;
 import org.uncle.lee.simpledatasource.Entity.in.App;
 import org.uncle.lee.simpledatasource.Entity.in.Contact;
 import org.uncle.lee.simpledatasource.Utils.LogUtils;
+import org.uncle.lee.simpledatasource.Utils.Transformer;
 import org.uncle.lee.simpledatasource.controller.CacheDataController;
 import org.uncle.lee.simpledatasource.controller.UniDataController;
 import org.uncle.lee.simpledatasource.listener.DataControllerListener;
@@ -57,7 +58,7 @@ public class UniDataCenter implements DataCenter {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<Contact> contacts) {
         if(Type.equals(ActionType.QUERY_ALL_DONE) && isSuccess){
           UniDataCenter.this.listener.onAction(UniDataCenterListener.ActionType.QUERY_ALL_DONE, true, contacts);
-          saveCacheContactList(contacts);
+          saveCacheContactList(contacts, CacheDataController.SaveType.TYPE_ADD);
         }
       }
     });
@@ -65,21 +66,21 @@ public class UniDataCenter implements DataCenter {
   }
 
   @Override public void insertContactList(List<Contact> contactList) {
-    this.contactTemp = contactList;
-    //this.contactTemp = Transformer.addPyForContact(mContext, contactList);
+    this.contactTemp = new Transformer().addPyForContact(mContext, contactList);
     uniDataController.contactDataController().setListener(new DataControllerListener<Contact>() {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<Contact> contacts) {
         if(Type.equals(ActionType.INSERT_DONE) && isSuccess){
           UniDataCenter.this.listener.onAction(UniDataCenterListener.ActionType.INSERT_DONE, true, null);
-          saveCacheContactList(contactTemp);
+          saveCacheContactList(contactTemp, CacheDataController.SaveType.TYPE_ADD);
         }
       }
     });
     uniDataController.contactDataController().insert(contactList);
   }
 
-  private void saveCacheContactList(List<Contact> contacts) {
-    uniDataController.cacheDataController().saveCacheContactList(contacts);
+  private void saveCacheContactList(List<Contact> contacts, CacheDataController.SaveType saveType) {
+    LogUtils.d(TAG, saveType + " cache contact list ...");
+    uniDataController.cacheDataController().saveCacheContactList(contacts, saveType);
   }
 
   @Override public void cleanContactList() {
@@ -87,7 +88,7 @@ public class UniDataCenter implements DataCenter {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<Contact> contacts) {
         if(Type.equals(ActionType.CLEAN_DONE) && isSuccess){
           UniDataCenter.this.listener.onAction(UniDataCenterListener.ActionType.CLEAN_DONE, true, null);
-          saveCacheContactList(Collections.<Contact>emptyList());
+          saveCacheContactList(Collections.<Contact>emptyList(), CacheDataController.SaveType.TYPE_CLEAN);
         }
       }
     });
@@ -122,7 +123,6 @@ public class UniDataCenter implements DataCenter {
   private void saveCacheAppList(List<App> apps, CacheDataController.SaveType saveType) {
     LogUtils.d(TAG, "start cache app list ...");
     uniDataController.cacheDataController().saveCacheAppList(apps, saveType);
-    LogUtils.d(TAG, "cache app list finish ...");
   }
 
   @Override public void insertAppList(List<App> appList) {

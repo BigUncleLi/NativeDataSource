@@ -87,14 +87,4 @@ public class App {
         this.nickName = nickName;
     }
 
-    @Override public String toString() {
-        return "App{" +
-            "id=" + id +
-            ", packageName='" + packageName + '\'' +
-            ", appLabel='" + appLabel + '\'' +
-            ", appPyLabel='" + appPyLabel + '\'' +
-            ", className='" + className + '\'' +
-            ", nickName='" + nickName + '\'' +
-            '}';
-    }
 }

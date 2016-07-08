@@ -15,7 +15,7 @@ import org.uncle.lee.simpledatasource.listener.UniDataCenterListener;
 
 public class MainActivity extends AppCompatActivity {
   public static final String TAG = "uniDatabase";
-  public static final int MAX_NUMBER = 3000;
+  public static final int MAX_NUMBER = 10000;
   private UniDataCenter instance;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
@@ -149,8 +149,9 @@ public class MainActivity extends AppCompatActivity {
     instance.insertAppList(appList);
   }
 
+  private List<App> appList = new ArrayList<App>();
   private List<App> createAppList() {
-    List<App> appList = new ArrayList<App>();
+    appList.clear();
     for(int i = 0; i < MAX_NUMBER; i++){
       App app = new App(null, "app" + i, "应用" + i, "pyLabe" + i, "className" + i, "nickName" + i);
       appList.add(app);
@@ -161,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
   private List<Contact> createContactList() {
     List<Contact> contactList = new ArrayList<Contact>();
     for(int i = 0; i < MAX_NUMBER; i++){
-      Contact contact = new Contact(null, "张三", "pyName" + i, "10086");
+      Contact contact = new Contact(null, "张三", "pyName" + i, "10086", false);
       contactList.add(contact);
     }
     return contactList;
