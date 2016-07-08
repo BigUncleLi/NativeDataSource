@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import org.uncle.lee.simpledatasource.Entity.in.App;
 import org.uncle.lee.simpledatasource.Entity.in.Contact;
+import org.uncle.lee.simpledatasource.Utils.Transformer;
 import org.uncle.lee.simpledatasource.controller.UniDataController;
 import org.uncle.lee.simpledatasource.listener.DataControllerListener;
 import org.uncle.lee.simpledatasource.listener.UniDataCenterListener;
@@ -16,11 +17,13 @@ public class UniDataCenter implements DataCenter {
   private static UniDataCenter uniDataCenter;
   private UniDataCenterListener listener;
   private UniDataController uniDataController;
+  private Context mContext;
   private CacheData cacheData;
   private List<Contact> contactTemp;
   private List<App> appTemp;
 
   private UniDataCenter(Context mContext){
+    this.mContext = mContext;
     uniDataController = new UniDataController(mContext);
     cacheData = new CacheData();
   }
@@ -73,7 +76,7 @@ public class UniDataCenter implements DataCenter {
   }
 
   private void startInsertContactList(List<Contact> contacts) {
-    this.contactTemp = contacts;
+    this.contactTemp = Transformer.addPyForContact(mContext, contacts);
     uniDataController.contactDao().setListener(new DataControllerListener<Contact>() {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<Contact> contacts) {
         if(Type.equals(ActionType.INSERT_DONE) && isSuccess){
@@ -142,7 +145,7 @@ public class UniDataCenter implements DataCenter {
   }
 
   private void startInsertAppList(List<App> apps) {
-    this.appTemp = apps;
+    this.appTemp = Transformer.addPyForApp(mContext, apps);
     uniDataController.appDao().setListener(new DataControllerListener<App>() {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<App> apps) {
         if(Type.equals(ActionType.INSERT_DONE) && isSuccess){
