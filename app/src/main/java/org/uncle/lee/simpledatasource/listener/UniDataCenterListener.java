@@ -9,6 +9,7 @@ public interface UniDataCenterListener {
   public abstract void onAction(ActionType actionType, boolean isSuccess, List<?> dataList);
 
   public enum ActionType{
+    INIT_DONE,
     INSERT_DONE,
     QUERY_ALL_DONE,
     CLEAN_DONE;

@@ -9,6 +9,8 @@ import org.uncle.lee.simpledatasource.listener.UniDataCenterListener;
  * Created by Austin on 2016/7/7.
  */
 public interface DataCenter {
+  public abstract void init();
+
   public abstract void queryContactList();
   public abstract void insertContactList(List<Contact> contactList);
   public abstract void cleanContactList();
