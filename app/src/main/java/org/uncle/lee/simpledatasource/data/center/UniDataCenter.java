@@ -27,7 +27,9 @@ public class UniDataCenter implements DataCenter {
     uniDataController = new UniDataController(mContext);
   }
 
-  public static UniDataCenter getInstance(Context mContext){
+
+  @Override
+  public void init(Context mContext) {
     if(uniDataCenter == null){
       synchronized (UniDataCenter.class){
         if(uniDataCenter == null){
@@ -35,7 +37,17 @@ public class UniDataCenter implements DataCenter {
         }
       }
     }
-    return uniDataCenter;
+    if(listener != null){
+      listener.onAction(UniDataCenterListener.ActionType.INIT_DONE, true, null);
+    }
+  }
+
+  public static UniDataCenter getInstance(Context mContext){
+    if(uniDataCenter == null){
+      throw new RuntimeException("UniDataCenter must init first !");
+    }else {
+      return uniDataCenter;
+    }
   }
 
   @Override public void queryContactList() {
