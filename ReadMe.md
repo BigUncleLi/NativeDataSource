@@ -1,0 +1,22 @@
+1. invoke init(Context mContext);
+   mContext == null || dataCenterListener == null; throw new RuntimeException();
+   Listener.onAction(ActionType.INIT_DONE, null);
+   Listener.onAction(ActionType.INIT_DONE, List<String> errorMsg);
+2. invoke queryContactList()
+   Listener.onAction(ActionType.QUERY_ALL_DONE, List<Contact> contactList);
+   Listener.onAction(ActionType.QUERY_ALL_ERROR, List<String> errorMsg);
+3. insertContactList(List<Contact> contactList);
+   Listener.onAction(ActionType.INSERT_DONE, null);
+   Listener.onAction(ActionType.INSERT_ERROR, List<String> errorMsg);
+4. cleanContactList();
+   Listener.onAction(ActionType.CLEAN_DONE, null);
+   Listener.onAction(ActionType.CLEAN_ERROR, List<String> errorMsg);
+5. queryAppList();
+   Listener.onAction(ActionType.QUERY_ALL_DONE, List<App> appList);
+   Listener.onAction(ActionType.QUERY_ALL_ERROR, List<String> errorMsg);
+6. insertAppList(List<App> appList);
+   Listener.onAction(ActionType.INSERT_DONE, null);
+   Listener.onAction(ActionType.INSERT_ERROR, List<String> errorMsg);
+7. void cleanAppList();
+   Listener.onAction(ActionType.CLEAN_DONE, null);
+   Listener.onAction(ActionType.CLEAN_ERROR, List<String> errorMsg);
