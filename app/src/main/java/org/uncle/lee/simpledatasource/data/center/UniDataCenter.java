@@ -61,8 +61,8 @@ public class UniDataCenter implements DataCenter {
     if(!isHasContactCacheData()){
       queryContactInFirstTime();
     }else {
-      this.listener.onAction(DataCenterListener.ActionType.QUERY_ALL_DONE, true,
-          uniDataController.cacheDataController().cacheContactList());
+      this.listener.onAction(ActionType.QUERY_ALL_DONE,
+              uniDataController.cacheDataController().cacheContactList());
     }
   }
 
@@ -74,7 +74,7 @@ public class UniDataCenter implements DataCenter {
     uniDataController.contactDataController().setListener(new DataControllerListener<Contact>() {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<Contact> contacts) {
         if(Type.equals(ActionType.QUERY_ALL_DONE) && isSuccess){
-          UniDataCenter.this.listener.onAction(DataCenterListener.ActionType.QUERY_ALL_DONE, true, contacts);
+          UniDataCenter.this.listener.onAction(ActionType.QUERY_ALL_DONE, contacts);
           saveCacheContactList(contacts, CacheDataController.SaveType.TYPE_ADD);
         }
       }
@@ -88,7 +88,7 @@ public class UniDataCenter implements DataCenter {
     uniDataController.contactDataController().setListener(new DataControllerListener<Contact>() {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<Contact> contacts) {
         if(Type.equals(ActionType.INSERT_DONE) && isSuccess){
-          UniDataCenter.this.listener.onAction(DataCenterListener.ActionType.INSERT_DONE, true, null);
+          UniDataCenter.this.listener.onAction(ActionType.INSERT_DONE, null);
           saveCacheContactList(finalContactList, CacheDataController.SaveType.TYPE_ADD);
         }
       }
@@ -105,7 +105,7 @@ public class UniDataCenter implements DataCenter {
     uniDataController.contactDataController().setListener(new DataControllerListener<Contact>() {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<Contact> contacts) {
         if(Type.equals(ActionType.CLEAN_DONE) && isSuccess){
-          UniDataCenter.this.listener.onAction(DataCenterListener.ActionType.CLEAN_DONE, true, null);
+          UniDataCenter.this.listener.onAction(ActionType.CLEAN_DONE, null);
           saveCacheContactList(Collections.<Contact>emptyList(), CacheDataController.SaveType.TYPE_CLEAN);
         }
       }
@@ -117,7 +117,7 @@ public class UniDataCenter implements DataCenter {
     if(!isHasAppCacheData()){
       queryAppInFirstTime();
     }else {
-      this.listener.onAction(DataCenterListener.ActionType.QUERY_ALL_DONE, true,
+      this.listener.onAction(ActionType.QUERY_ALL_DONE,
           uniDataController.cacheDataController().cacheAppList());
     }
   }
@@ -130,7 +130,7 @@ public class UniDataCenter implements DataCenter {
     uniDataController.appDataController().setListener(new DataControllerListener<App>() {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<App> apps) {
         if(Type.equals(ActionType.QUERY_ALL_DONE) && isSuccess){
-          UniDataCenter.this.listener.onAction(DataCenterListener.ActionType.QUERY_ALL_DONE, true, apps);
+          UniDataCenter.this.listener.onAction(ActionType.QUERY_ALL_DONE, apps);
           saveCacheAppList(apps, CacheDataController.SaveType.TYPE_ADD);
         }
       }
@@ -148,7 +148,7 @@ public class UniDataCenter implements DataCenter {
     uniDataController.appDataController().setListener(new DataControllerListener<App>() {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<App> apps) {
         if(Type.equals(ActionType.INSERT_DONE) && isSuccess){
-          UniDataCenter.this.listener.onAction(DataCenterListener.ActionType.INSERT_DONE, true, null);
+          UniDataCenter.this.listener.onAction(ActionType.INSERT_DONE, null);
           saveCacheAppList(appList, CacheDataController.SaveType.TYPE_ADD);
         }
       }
@@ -159,7 +159,7 @@ public class UniDataCenter implements DataCenter {
   @Override public void cleanAppList() {
     uniDataController.appDataController().setListener(new DataControllerListener<App>() {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<App> apps) {
-        UniDataCenter.this.listener.onAction(DataCenterListener.ActionType.CLEAN_DONE, true, null);
+        UniDataCenter.this.listener.onAction(ActionType.CLEAN_DONE, null);
         saveCacheAppList(Collections.<App>emptyList(), CacheDataController.SaveType.TYPE_CLEAN);
       }
     });
