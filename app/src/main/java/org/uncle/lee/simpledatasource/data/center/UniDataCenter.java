@@ -9,16 +9,19 @@ import org.uncle.lee.simpledatasource.Utils.LogUtils;
 import org.uncle.lee.simpledatasource.Utils.Transformer;
 import org.uncle.lee.simpledatasource.controller.CacheDataController;
 import org.uncle.lee.simpledatasource.controller.UniDataController;
+import org.uncle.lee.simpledatasource.listener.ActionType;
 import org.uncle.lee.simpledatasource.listener.DataControllerListener;
-import org.uncle.lee.simpledatasource.listener.UniDataCenterListener;
+import org.uncle.lee.simpledatasource.listener.DataCenterListener;
 
 /**
  * Created by Austin on 2016/7/7.
  */
+
+// using thread to calculate
 public class UniDataCenter implements DataCenter {
   public static final String TAG = UniDataCenter.class.getSimpleName();
   private static UniDataCenter uniDataCenter;
-  private UniDataCenterListener listener;
+  private DataCenterListener listener;
   private UniDataController uniDataController;
   private Context mContext;
 
@@ -30,6 +33,10 @@ public class UniDataCenter implements DataCenter {
 
   @Override
   public void init(Context mContext) {
+    if(listener == null){
+      throw new RuntimeException("DataCenterListener is null !");
+    }
+
     if(uniDataCenter == null){
       synchronized (UniDataCenter.class){
         if(uniDataCenter == null){
@@ -38,7 +45,7 @@ public class UniDataCenter implements DataCenter {
       }
     }
     if(listener != null){
-      listener.onAction(UniDataCenterListener.ActionType.INIT_DONE, true, null);
+      listener.onAction(ActionType.INIT_DONE, null);
     }
   }
 
@@ -54,7 +61,7 @@ public class UniDataCenter implements DataCenter {
     if(!isHasContactCacheData()){
       queryContactInFirstTime();
     }else {
-      this.listener.onAction(UniDataCenterListener.ActionType.QUERY_ALL_DONE, true,
+      this.listener.onAction(DataCenterListener.ActionType.QUERY_ALL_DONE, true,
           uniDataController.cacheDataController().cacheContactList());
     }
   }
@@ -67,7 +74,7 @@ public class UniDataCenter implements DataCenter {
     uniDataController.contactDataController().setListener(new DataControllerListener<Contact>() {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<Contact> contacts) {
         if(Type.equals(ActionType.QUERY_ALL_DONE) && isSuccess){
-          UniDataCenter.this.listener.onAction(UniDataCenterListener.ActionType.QUERY_ALL_DONE, true, contacts);
+          UniDataCenter.this.listener.onAction(DataCenterListener.ActionType.QUERY_ALL_DONE, true, contacts);
           saveCacheContactList(contacts, CacheDataController.SaveType.TYPE_ADD);
         }
       }
@@ -81,7 +88,7 @@ public class UniDataCenter implements DataCenter {
     uniDataController.contactDataController().setListener(new DataControllerListener<Contact>() {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<Contact> contacts) {
         if(Type.equals(ActionType.INSERT_DONE) && isSuccess){
-          UniDataCenter.this.listener.onAction(UniDataCenterListener.ActionType.INSERT_DONE, true, null);
+          UniDataCenter.this.listener.onAction(DataCenterListener.ActionType.INSERT_DONE, true, null);
           saveCacheContactList(finalContactList, CacheDataController.SaveType.TYPE_ADD);
         }
       }
@@ -98,7 +105,7 @@ public class UniDataCenter implements DataCenter {
     uniDataController.contactDataController().setListener(new DataControllerListener<Contact>() {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<Contact> contacts) {
         if(Type.equals(ActionType.CLEAN_DONE) && isSuccess){
-          UniDataCenter.this.listener.onAction(UniDataCenterListener.ActionType.CLEAN_DONE, true, null);
+          UniDataCenter.this.listener.onAction(DataCenterListener.ActionType.CLEAN_DONE, true, null);
           saveCacheContactList(Collections.<Contact>emptyList(), CacheDataController.SaveType.TYPE_CLEAN);
         }
       }
@@ -110,7 +117,7 @@ public class UniDataCenter implements DataCenter {
     if(!isHasAppCacheData()){
       queryAppInFirstTime();
     }else {
-      this.listener.onAction(UniDataCenterListener.ActionType.QUERY_ALL_DONE, true,
+      this.listener.onAction(DataCenterListener.ActionType.QUERY_ALL_DONE, true,
           uniDataController.cacheDataController().cacheAppList());
     }
   }
@@ -123,7 +130,7 @@ public class UniDataCenter implements DataCenter {
     uniDataController.appDataController().setListener(new DataControllerListener<App>() {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<App> apps) {
         if(Type.equals(ActionType.QUERY_ALL_DONE) && isSuccess){
-          UniDataCenter.this.listener.onAction(UniDataCenterListener.ActionType.QUERY_ALL_DONE, true, apps);
+          UniDataCenter.this.listener.onAction(DataCenterListener.ActionType.QUERY_ALL_DONE, true, apps);
           saveCacheAppList(apps, CacheDataController.SaveType.TYPE_ADD);
         }
       }
@@ -141,7 +148,7 @@ public class UniDataCenter implements DataCenter {
     uniDataController.appDataController().setListener(new DataControllerListener<App>() {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<App> apps) {
         if(Type.equals(ActionType.INSERT_DONE) && isSuccess){
-          UniDataCenter.this.listener.onAction(UniDataCenterListener.ActionType.INSERT_DONE, true, null);
+          UniDataCenter.this.listener.onAction(DataCenterListener.ActionType.INSERT_DONE, true, null);
           saveCacheAppList(appList, CacheDataController.SaveType.TYPE_ADD);
         }
       }
@@ -152,14 +159,14 @@ public class UniDataCenter implements DataCenter {
   @Override public void cleanAppList() {
     uniDataController.appDataController().setListener(new DataControllerListener<App>() {
       @Override public void onAction(ActionType Type, boolean isSuccess, List<App> apps) {
-        UniDataCenter.this.listener.onAction(UniDataCenterListener.ActionType.CLEAN_DONE, true, null);
+        UniDataCenter.this.listener.onAction(DataCenterListener.ActionType.CLEAN_DONE, true, null);
         saveCacheAppList(Collections.<App>emptyList(), CacheDataController.SaveType.TYPE_CLEAN);
       }
     });
     uniDataController.appDataController().clean();
   }
 
-  @Override public void setListener(UniDataCenterListener listener) {
+  @Override public void setListener(DataCenterListener listener) {
     this.listener = listener;
   }
 }
