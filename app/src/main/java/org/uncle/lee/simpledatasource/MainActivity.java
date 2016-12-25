@@ -10,7 +10,8 @@ import java.util.List;
 import org.uncle.lee.simpledatasource.Entity.in.App;
 import org.uncle.lee.simpledatasource.Entity.in.Contact;
 import org.uncle.lee.simpledatasource.data.center.UniDataCenter;
-import org.uncle.lee.simpledatasource.listener.DataCenterListener;
+import org.uncle.lee.simpledatasource.listener.ActionType;
+import org.uncle.lee.simpledatasource.listener.DataListener;
 
 public class MainActivity extends AppCompatActivity {
   public static final String TAG = "uniDatabase";
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
   };
 
   private void cleanContact() {
-    instance.setListener(new DataCenterListener() {
+    instance.setListener(new DataListener() {
       @Override public void onAction(ActionType actionType, boolean isSuccess, List<?> dataList) {
         if(actionType.equals(ActionType.CLEAN_DONE) && isSuccess){
           Log.d(TAG, "clean done");
@@ -94,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void queryContact() {
-    instance.setListener(new DataCenterListener() {
+    instance.setListener(new DataListener() {
       @Override public void onAction(ActionType actionType, boolean isSuccess, List<?> dataList) {
         if(actionType.equals(ActionType.QUERY_ALL_DONE) && isSuccess){
           Log.d(TAG, "contact number : " + dataList.size());
@@ -105,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void insertContact(List<Contact> contactList) {
-    instance.setListener(new DataCenterListener() {
+    instance.setListener(new DataListener() {
       @Override public void onAction(ActionType actionType, boolean isSuccess, List<?> dataList) {
         if(actionType.equals(ActionType.INSERT_DONE) && isSuccess){
           Log.d(TAG, "insert done");
@@ -116,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void cleanApps() {
-    instance.setListener(new DataCenterListener() {
+    instance.setListener(new DataListener() {
       @Override public void onAction(ActionType actionType, boolean isSuccess, List<?> dataList) {
         if(actionType.equals(ActionType.CLEAN_DONE) && isSuccess){
           Log.d(TAG, "clean done");
@@ -127,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void queryApps() {
-    instance.setListener(new DataCenterListener() {
+    instance.setListener(new DataListener() {
       @Override public void onAction(ActionType actionType, boolean isSuccess, List<?> dataList) {
         if(actionType.equals(ActionType.QUERY_ALL_DONE) && isSuccess){
           Log.d(TAG, "app number : " + dataList.size());
@@ -138,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void insertApps(List<App> appList) {
-    instance.setListener(new DataCenterListener() {
+    instance.setListener(new DataListener() {
       @Override public void onAction(ActionType actionType, boolean isSuccess, List<?> dataList) {
         if(actionType.equals(ActionType.INSERT_DONE) && isSuccess){
           Log.d(TAG, "insert apps done");

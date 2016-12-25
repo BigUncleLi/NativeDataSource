@@ -10,8 +10,7 @@ import org.uncle.lee.simpledatasource.Utils.Transformer;
 import org.uncle.lee.simpledatasource.controller.CacheDataController;
 import org.uncle.lee.simpledatasource.controller.UniDataController;
 import org.uncle.lee.simpledatasource.listener.ActionType;
-import org.uncle.lee.simpledatasource.listener.DataControllerListener;
-import org.uncle.lee.simpledatasource.listener.DataCenterListener;
+import org.uncle.lee.simpledatasource.listener.DataListener;
 
 /**
  * Created by Austin on 2016/7/7.
@@ -21,7 +20,7 @@ import org.uncle.lee.simpledatasource.listener.DataCenterListener;
 public class UniDataCenter implements DataCenter {
   public static final String TAG = UniDataCenter.class.getSimpleName();
   private static UniDataCenter uniDataCenter;
-  private DataCenterListener listener;
+  private DataListener listener;
   private UniDataController uniDataController;
   private Context mContext;
 
@@ -34,7 +33,7 @@ public class UniDataCenter implements DataCenter {
   @Override
   public void init(Context mContext) {
     if(listener == null){
-      throw new RuntimeException("DataCenterListener is null !");
+      throw new RuntimeException("DataListener is null !");
     }
 
     if(uniDataCenter == null){
@@ -71,9 +70,9 @@ public class UniDataCenter implements DataCenter {
   }
 
   private void queryContactInFirstTime() {
-    uniDataController.contactDataController().setListener(new DataControllerListener<Contact>() {
-      @Override public void onAction(ActionType Type, boolean isSuccess, List<Contact> contacts) {
-        if(Type.equals(ActionType.QUERY_ALL_DONE) && isSuccess){
+    uniDataController.contactDataController().setListener(new DataListener<Contact>() {
+      @Override public void onAction(ActionType Type, List<Contact> contacts) {
+        if(Type.equals(ActionType.QUERY_ALL_DONE)){
           UniDataCenter.this.listener.onAction(ActionType.QUERY_ALL_DONE, contacts);
           saveCacheContactList(contacts, CacheDataController.SaveType.TYPE_ADD);
         }
@@ -85,9 +84,9 @@ public class UniDataCenter implements DataCenter {
   @Override public void insertContactList(List<Contact> contactList) {
     contactList = new Transformer().addPyForContact(mContext, contactList);
     final List<Contact> finalContactList = contactList;
-    uniDataController.contactDataController().setListener(new DataControllerListener<Contact>() {
-      @Override public void onAction(ActionType Type, boolean isSuccess, List<Contact> contacts) {
-        if(Type.equals(ActionType.INSERT_DONE) && isSuccess){
+    uniDataController.contactDataController().setListener(new DataListener<Contact>() {
+      @Override public void onAction(ActionType Type, List<Contact> contacts) {
+        if(Type.equals(ActionType.INSERT_DONE)){
           UniDataCenter.this.listener.onAction(ActionType.INSERT_DONE, null);
           saveCacheContactList(finalContactList, CacheDataController.SaveType.TYPE_ADD);
         }
@@ -102,9 +101,9 @@ public class UniDataCenter implements DataCenter {
   }
 
   @Override public void cleanContactList() {
-    uniDataController.contactDataController().setListener(new DataControllerListener<Contact>() {
-      @Override public void onAction(ActionType Type, boolean isSuccess, List<Contact> contacts) {
-        if(Type.equals(ActionType.CLEAN_DONE) && isSuccess){
+    uniDataController.contactDataController().setListener(new DataListener<Contact>() {
+      @Override public void onAction(ActionType Type, List<Contact> contacts) {
+        if(Type.equals(ActionType.CLEAN_DONE)){
           UniDataCenter.this.listener.onAction(ActionType.CLEAN_DONE, null);
           saveCacheContactList(Collections.<Contact>emptyList(), CacheDataController.SaveType.TYPE_CLEAN);
         }
@@ -127,9 +126,9 @@ public class UniDataCenter implements DataCenter {
   }
 
   private void queryAppInFirstTime() {
-    uniDataController.appDataController().setListener(new DataControllerListener<App>() {
-      @Override public void onAction(ActionType Type, boolean isSuccess, List<App> apps) {
-        if(Type.equals(ActionType.QUERY_ALL_DONE) && isSuccess){
+    uniDataController.appDataController().setListener(new DataListener<App>() {
+      @Override public void onAction(ActionType Type, List<App> apps) {
+        if(Type.equals(ActionType.QUERY_ALL_DONE)){
           UniDataCenter.this.listener.onAction(ActionType.QUERY_ALL_DONE, apps);
           saveCacheAppList(apps, CacheDataController.SaveType.TYPE_ADD);
         }
@@ -145,9 +144,9 @@ public class UniDataCenter implements DataCenter {
 
   @Override public void insertAppList(final List<App> appList) {
     // app don't need to get py params(this part is too wasting time)
-    uniDataController.appDataController().setListener(new DataControllerListener<App>() {
-      @Override public void onAction(ActionType Type, boolean isSuccess, List<App> apps) {
-        if(Type.equals(ActionType.INSERT_DONE) && isSuccess){
+    uniDataController.appDataController().setListener(new DataListener<App>() {
+      @Override public void onAction(ActionType Type, List<App> apps) {
+        if(Type.equals(ActionType.INSERT_DONE)){
           UniDataCenter.this.listener.onAction(ActionType.INSERT_DONE, null);
           saveCacheAppList(appList, CacheDataController.SaveType.TYPE_ADD);
         }
@@ -157,8 +156,8 @@ public class UniDataCenter implements DataCenter {
   }
 
   @Override public void cleanAppList() {
-    uniDataController.appDataController().setListener(new DataControllerListener<App>() {
-      @Override public void onAction(ActionType Type, boolean isSuccess, List<App> apps) {
+    uniDataController.appDataController().setListener(new DataListener<App>() {
+      @Override public void onAction(ActionType Type, List<App> apps) {
         UniDataCenter.this.listener.onAction(ActionType.CLEAN_DONE, null);
         saveCacheAppList(Collections.<App>emptyList(), CacheDataController.SaveType.TYPE_CLEAN);
       }
@@ -166,7 +165,7 @@ public class UniDataCenter implements DataCenter {
     uniDataController.appDataController().clean();
   }
 
-  @Override public void setListener(DataCenterListener listener) {
+  @Override public void setListener(DataListener listener) {
     this.listener = listener;
   }
 }

@@ -7,7 +7,6 @@ import org.uncle.lee.simpledatasource.Entity.in.Contact;
 import org.uncle.lee.simpledatasource.dao.ContactDao;
 import org.uncle.lee.simpledatasource.dao.DaoMaster;
 import org.uncle.lee.simpledatasource.dao.DaoSession;
-import org.uncle.lee.simpledatasource.listener.DataControllerListener;
 
 /**
  * Created by Austin on 2016/7/6.

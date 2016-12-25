@@ -1,7 +1,7 @@
 package org.uncle.lee.simpledatasource.controller;
 
 import java.util.List;
-import org.uncle.lee.simpledatasource.listener.DataControllerListener;
+import org.uncle.lee.simpledatasource.listener.DataListener;
 
 /**
  * Created by Austin on 2016/7/6.
@@ -17,7 +17,7 @@ public interface DataController<T, K> {
 
   public abstract void insert(T t);
 
-  public abstract void setListener(DataControllerListener<T> listener);
+  public abstract void setListener(DataListener<T> listener);
 
   @Deprecated
   public abstract boolean deleteByKeyword(K k);
