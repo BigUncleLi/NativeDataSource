@@ -84,9 +84,9 @@ public class MainActivity extends AppCompatActivity {
   };
 
   private void cleanContact() {
-    instance.setListener(new DataListener() {
-      @Override public void onAction(ActionType actionType, boolean isSuccess, List<?> dataList) {
-        if(actionType.equals(ActionType.CLEAN_DONE) && isSuccess){
+    instance.setListener(new DataListener<String>() {
+      @Override public void onAction(ActionType actionType, List<String> dataList) {
+        if(actionType.equals(ActionType.CLEAN_DONE)){
           Log.d(TAG, "clean done");
         }
       }
@@ -95,9 +95,9 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void queryContact() {
-    instance.setListener(new DataListener() {
-      @Override public void onAction(ActionType actionType, boolean isSuccess, List<?> dataList) {
-        if(actionType.equals(ActionType.QUERY_ALL_DONE) && isSuccess){
+    instance.setListener(new DataListener<Contact>() {
+      @Override public void onAction(ActionType actionType, List<Contact> dataList) {
+        if(actionType.equals(ActionType.QUERY_ALL_DONE)){
           Log.d(TAG, "contact number : " + dataList.size());
         }
       }
@@ -106,9 +106,9 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void insertContact(List<Contact> contactList) {
-    instance.setListener(new DataListener() {
-      @Override public void onAction(ActionType actionType, boolean isSuccess, List<?> dataList) {
-        if(actionType.equals(ActionType.INSERT_DONE) && isSuccess){
+    instance.setListener(new DataListener<String>() {
+      @Override public void onAction(ActionType actionType, List<String> dataList) {
+        if(actionType.equals(ActionType.INSERT_DONE)){
           Log.d(TAG, "insert done");
         }
       }
@@ -117,9 +117,9 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void cleanApps() {
-    instance.setListener(new DataListener() {
-      @Override public void onAction(ActionType actionType, boolean isSuccess, List<?> dataList) {
-        if(actionType.equals(ActionType.CLEAN_DONE) && isSuccess){
+    instance.setListener(new DataListener<String>() {
+      @Override public void onAction(ActionType actionType, List<String> dataList) {
+        if(actionType.equals(ActionType.CLEAN_DONE)){
           Log.d(TAG, "clean done");
         }
       }
@@ -128,9 +128,9 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void queryApps() {
-    instance.setListener(new DataListener() {
-      @Override public void onAction(ActionType actionType, boolean isSuccess, List<?> dataList) {
-        if(actionType.equals(ActionType.QUERY_ALL_DONE) && isSuccess){
+    instance.setListener(new DataListener<App>() {
+      @Override public void onAction(ActionType actionType, List<App> dataList) {
+        if(actionType.equals(ActionType.QUERY_ALL_DONE)){
           Log.d(TAG, "app number : " + dataList.size());
         }
       }
@@ -139,9 +139,9 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void insertApps(List<App> appList) {
-    instance.setListener(new DataListener() {
-      @Override public void onAction(ActionType actionType, boolean isSuccess, List<?> dataList) {
-        if(actionType.equals(ActionType.INSERT_DONE) && isSuccess){
+    instance.setListener(new DataListener<String>() {
+      @Override public void onAction(ActionType actionType, List<String> dataList) {
+        if(actionType.equals(ActionType.INSERT_DONE)){
           Log.d(TAG, "insert apps done");
         }
       }

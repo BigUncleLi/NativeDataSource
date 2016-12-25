@@ -7,12 +7,14 @@ import org.uncle.lee.simpledatasource.Entity.in.Contact;
 import org.uncle.lee.simpledatasource.dao.ContactDao;
 import org.uncle.lee.simpledatasource.dao.DaoMaster;
 import org.uncle.lee.simpledatasource.dao.DaoSession;
+import org.uncle.lee.simpledatasource.listener.ActionType;
+import org.uncle.lee.simpledatasource.listener.DataListener;
 
 /**
  * Created by Austin on 2016/7/6.
  */
 public class ContactDataController implements DataController<Contact, String> {
-  private DataControllerListener<Contact> listener;
+  private DataListener<Contact> listener;
   private ExecutorService threadPool;
   private ContactDao readContactDao;
   private ContactDao writeContactDao;
@@ -45,9 +47,14 @@ public class ContactDataController implements DataController<Contact, String> {
     });
   }
 
+  @Override
+  public void setListener(DataListener<Contact> listener) {
+    this.listener = listener;
+  }
+
   private synchronized void insertSyn(Contact contact) {
     writeContactDao.insert(contact);
-    this.listener.onAction(DataControllerListener.ActionType.INSERT_DONE, true, null);
+    this.listener.onAction(ActionType.INSERT_DONE, null);
   }
 
   @Override public void insert(final List<Contact> contacts) {
@@ -60,7 +67,7 @@ public class ContactDataController implements DataController<Contact, String> {
 
   private synchronized void insertSyn(List<Contact> contacts){
     writeContactDao.insertInTx(contacts);
-    this.listener.onAction(DataControllerListener.ActionType.INSERT_DONE, true, null);
+    this.listener.onAction(ActionType.INSERT_DONE, null);
   }
 
   @Override public void queryAll() {
@@ -73,7 +80,7 @@ public class ContactDataController implements DataController<Contact, String> {
 
   private synchronized void queryAllSyn() {
     List<Contact> contactList = readContactDao.loadAll();
-    this.listener.onAction(DataControllerListener.ActionType.QUERY_ALL_DONE, true, contactList);
+    this.listener.onAction(ActionType.QUERY_ALL_DONE, contactList);
   }
 
   @Override public void clean() {
@@ -86,11 +93,7 @@ public class ContactDataController implements DataController<Contact, String> {
 
   private synchronized void cleanSyn() {
     writeContactDao.deleteAll();
-    this.listener.onAction(DataControllerListener.ActionType.CLEAN_DONE, true, null);
-  }
-
-  @Override public void setListener(DataControllerListener<Contact> listener) {
-    this.listener = listener;
+    this.listener.onAction(ActionType.CLEAN_DONE, null);
   }
 
   @Override public boolean deleteByKeyword(String s) {

@@ -8,6 +8,8 @@ import org.uncle.lee.simpledatasource.Entity.in.App;
 import org.uncle.lee.simpledatasource.dao.AppDao;
 import org.uncle.lee.simpledatasource.dao.DaoMaster;
 import org.uncle.lee.simpledatasource.dao.DaoSession;
+import org.uncle.lee.simpledatasource.listener.ActionType;
+import org.uncle.lee.simpledatasource.listener.DataListener;
 
 /**
  * Created by Austin on 2016/7/6.
@@ -15,7 +17,7 @@ import org.uncle.lee.simpledatasource.dao.DaoSession;
 public class AppDataController implements DataController<App, String> {
   public static final String TAG = AppDataController.class.getSimpleName();
 
-  private DataControllerListener<App> listener;
+  private DataListener<App> listener;
   private ExecutorService threadPool;
   private AppDao readAppDao;
   private AppDao writeAppDao;
@@ -48,10 +50,15 @@ public class AppDataController implements DataController<App, String> {
     });
   }
 
+  @Override
+  public void setListener(DataListener<App> listener) {
+    this.listener = listener;
+  }
+
   private synchronized void insertSyn(App app) {
     Log.d(TAG, "insert syn...");
     writeAppDao.insert(app);
-    this.listener.onAction(DataControllerListener.ActionType.INSERT_DONE, true, null);
+    this.listener.onAction(ActionType.INSERT_DONE, null);
   }
 
   @Override public void insert(final List<App> apps) {
@@ -65,7 +72,7 @@ public class AppDataController implements DataController<App, String> {
   private synchronized void insertSyn(List<App> apps){
     Log.d(TAG, "insert list syn...");
     writeAppDao.insertInTx(apps);
-    this.listener.onAction(DataControllerListener.ActionType.INSERT_DONE, true, null);
+    this.listener.onAction(ActionType.INSERT_DONE, null);
   }
 
   @Override public void queryAll() {
@@ -79,7 +86,7 @@ public class AppDataController implements DataController<App, String> {
   private synchronized void queryAllSyn() {
     Log.d(TAG, "query syn...");
     List<App> appList = readAppDao.loadAll();
-    this.listener.onAction(DataControllerListener.ActionType.QUERY_ALL_DONE, true, appList);
+    this.listener.onAction(ActionType.QUERY_ALL_DONE, appList);
   }
 
   @Override public void clean() {
@@ -93,15 +100,11 @@ public class AppDataController implements DataController<App, String> {
   private synchronized void cleanSyn() {
     Log.d(TAG, "clean syn...");
     writeAppDao.deleteAll();
-    this.listener.onAction(DataControllerListener.ActionType.CLEAN_DONE, true, null);
+    this.listener.onAction(ActionType.CLEAN_DONE, null);
   }
 
   public void queryByName(String name){}
   public void queryById(String id){}
-
-  @Override public void setListener(DataControllerListener<App> listener) {
-    this.listener = listener;
-  }
 
   @Override public boolean deleteByKeyword(String s) {
     return false;
