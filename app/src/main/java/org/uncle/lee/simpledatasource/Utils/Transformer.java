@@ -71,17 +71,17 @@ public class Transformer {
 
   private List<UniContact> combineMultiUniContact(List<UniContact> originUniContactList) {
     HashMap<String, UniContact> map = new HashMap<String, UniContact>();
-    List<UniContact> newSingleUnicontactList = new ArrayList<UniContact>();
+    List<UniContact> singleUnicontactList = new ArrayList<UniContact>();
     for(UniContact uniContact : originUniContactList){
       if(map.containsKey(uniContact.getContactName())){
         UniContact uniContactTemp = map.get(uniContact.getContactName());
         uniContactTemp.getContactPhoneNO().addAll(uniContact.getContactPhoneNO());
       }else {
         map.put(uniContact.getContactName(), uniContact);
-        newSingleUnicontactList.add(uniContact);
+        singleUnicontactList.add(uniContact);
       }
     }
-    return newSingleUnicontactList;
+    return singleUnicontactList;
   }
 
   @NonNull private UniContact createUniContact(Contact contact) {

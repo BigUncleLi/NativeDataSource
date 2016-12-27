@@ -3,7 +3,7 @@ package org.uncle.lee.simpledatasource.Entity.out;
 import java.util.ArrayList;
 
 /**
- * Created by fanxin on 2016/3/25 0025.
+ * Created by Austin on 2016/7/7.
  */
 public class UniApp {
   private String mPackageName;
