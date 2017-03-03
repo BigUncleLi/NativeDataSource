@@ -8,17 +8,19 @@ import org.uncle.lee.simpledatasource.Entity.in.Contact;
 import org.uncle.lee.simpledatasource.listener.DataListener;
 
 /**
- * Created by Austin on 2016/7/7.
+ * all functions provided for users
  */
-public interface DataCenter {
-  public abstract void setListener(DataListener<?> listener);
-  public abstract void init(Context mContext);
+interface DataCenter {
+  void setListener(DataListener<?> listener);
+  void init(Context mContext);
 
-  public abstract void queryContactList();
-  public abstract void insertContactList(List<Contact> contactList);
-  public abstract void cleanContactList();
+  void queryContactList();
+  void insertContactList(List<Contact> contactList);
+  void cleanContactList();
 
-  public abstract void queryAppList();
-  public abstract void insertAppList(List<App> appList);
-  public abstract void cleanAppList();
+  void queryAppList();
+  App queryAppByName(String name);
+  App queryAppByPackageName(String packageName);
+  void insertAppList(List<App> appList);
+  void cleanAppList();
 }
