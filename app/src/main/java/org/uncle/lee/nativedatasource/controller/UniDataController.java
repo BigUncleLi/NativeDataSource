@@ -3,9 +3,9 @@ package org.uncle.lee.nativedatasource.controller;
 import android.content.Context;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import org.uncle.lee.simpledatasource.Entity.in.App;
-import org.uncle.lee.simpledatasource.Entity.in.Contact;
-import org.uncle.lee.simpledatasource.dao.DaoMaster;
+import org.uncle.lee.nativedatasource.Entity.in.App;
+import org.uncle.lee.nativedatasource.Entity.in.Contact;
+import org.uncle.lee.nativedatasource.dao.DaoMaster;
 
 /**
  * Created by Austin on 2016/7/6.

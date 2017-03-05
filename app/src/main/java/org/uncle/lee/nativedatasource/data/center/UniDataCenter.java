@@ -3,14 +3,14 @@ package org.uncle.lee.nativedatasource.data.center;
 import android.content.Context;
 import java.util.Collections;
 import java.util.List;
-import org.uncle.lee.simpledatasource.Entity.in.App;
-import org.uncle.lee.simpledatasource.Entity.in.Contact;
-import org.uncle.lee.simpledatasource.Utils.LogUtils;
-import org.uncle.lee.simpledatasource.Utils.Transformer;
-import org.uncle.lee.simpledatasource.controller.CacheDataController;
-import org.uncle.lee.simpledatasource.controller.UniDataController;
-import org.uncle.lee.simpledatasource.listener.ActionType;
-import org.uncle.lee.simpledatasource.listener.DataListener;
+import org.uncle.lee.nativedatasource.Entity.in.App;
+import org.uncle.lee.nativedatasource.Entity.in.Contact;
+import org.uncle.lee.nativedatasource.Utils.LogUtils;
+import org.uncle.lee.nativedatasource.Utils.Transformer;
+import org.uncle.lee.nativedatasource.controller.CacheDataController;
+import org.uncle.lee.nativedatasource.controller.UniDataController;
+import org.uncle.lee.nativedatasource.listener.ActionType;
+import org.uncle.lee.nativedatasource.listener.DataListener;
 
 /**
  * Created by Austin on 2016/7/7.
@@ -119,6 +119,14 @@ public class UniDataCenter implements DataCenter {
       this.listener.onAction(ActionType.QUERY_ALL_DONE,
           uniDataController.cacheDataController().cacheAppList());
     }
+  }
+
+  @Override public App queryAppByName(String name) {
+    return null;
+  }
+
+  @Override public App queryAppByPackageName(String packageName) {
+    return null;
   }
 
   private boolean isHasAppCacheData(){

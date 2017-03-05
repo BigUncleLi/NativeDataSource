@@ -4,12 +4,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
-import org.uncle.lee.simpledatasource.Entity.in.App;
-import org.uncle.lee.simpledatasource.dao.AppDao;
-import org.uncle.lee.simpledatasource.dao.DaoMaster;
-import org.uncle.lee.simpledatasource.dao.DaoSession;
-import org.uncle.lee.simpledatasource.listener.ActionType;
-import org.uncle.lee.simpledatasource.listener.DataListener;
+import org.uncle.lee.nativedatasource.Entity.in.App;
+import org.uncle.lee.nativedatasource.dao.AppDao;
+import org.uncle.lee.nativedatasource.dao.DaoMaster;
+import org.uncle.lee.nativedatasource.dao.DaoSession;
+import org.uncle.lee.nativedatasource.listener.ActionType;
+import org.uncle.lee.nativedatasource.listener.DataListener;
 
 /**
  * Created by Austin on 2016/7/6.

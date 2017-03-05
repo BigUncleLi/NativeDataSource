@@ -3,9 +3,9 @@ package org.uncle.lee.nativedatasource.data.center;
 import android.content.Context;
 
 import java.util.List;
-import org.uncle.lee.simpledatasource.Entity.in.App;
-import org.uncle.lee.simpledatasource.Entity.in.Contact;
-import org.uncle.lee.simpledatasource.listener.DataListener;
+import org.uncle.lee.nativedatasource.Entity.in.App;
+import org.uncle.lee.nativedatasource.Entity.in.Contact;
+import org.uncle.lee.nativedatasource.listener.DataListener;
 
 /**
  * all functions provided for users

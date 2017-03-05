@@ -7,11 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import java.util.ArrayList;
 import java.util.List;
-import org.uncle.lee.simpledatasource.Entity.in.App;
-import org.uncle.lee.simpledatasource.Entity.in.Contact;
-import org.uncle.lee.simpledatasource.data.center.UniDataCenter;
-import org.uncle.lee.simpledatasource.listener.ActionType;
-import org.uncle.lee.simpledatasource.listener.DataListener;
+import org.uncle.lee.nativedatasource.Entity.in.App;
+import org.uncle.lee.nativedatasource.Entity.in.Contact;
+import org.uncle.lee.nativedatasource.data.center.UniDataCenter;
+import org.uncle.lee.nativedatasource.listener.ActionType;
+import org.uncle.lee.nativedatasource.listener.DataListener;
 
 public class MainActivity extends AppCompatActivity {
   public static final String TAG = "uniDatabase";

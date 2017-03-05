@@ -1,12 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="org.uncle.lee.nativedatasource.MainActivity"
+    android:orientation="vertical"
     >
 
+  <Button
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/bt_insert_app"
+      android:text="@string/bt_insert_app"
+      />
 
-</android.support.constraint.ConstraintLayout>
+  <Button
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/bt_query_apps"
+      android:text="@string/bt_query_apps"
+      />
+
+  <Button
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/bt_clean_apps"
+      android:text="@string/bt_clean_apps"
+      />
+
+  <Button
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/bt_insert_contact"
+      android:text="@string/bt_insert_contact"
+      />
+
+  <Button
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/bt_query_contacts"
+      android:text="@string/bt_query_contacts"
+      />
+
+  <Button
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/bt_clean_contacts"
+      android:text="@string/bt_clean_contacts"
+      />
+
+</LinearLayout>

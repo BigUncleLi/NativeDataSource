@@ -1,3 +1,9 @@
 <resources>
   <string name="app_name">NativeDataSource</string>
+  <string name="bt_insert_app">bt_insert_app</string>
+  <string name="bt_query_apps">bt_query_apps</string>
+  <string name="bt_clean_apps">bt_clean_apps</string>
+  <string name="bt_insert_contact">bt_insert_contact</string>
+  <string name="bt_query_contacts">bt_query_contacts</string>
+  <string name="bt_clean_contacts">bt_clean_contacts</string>
 </resources>

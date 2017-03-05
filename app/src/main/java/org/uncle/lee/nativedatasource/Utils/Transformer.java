@@ -13,11 +13,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import org.uncle.lee.simpledatasource.Entity.in.App;
-import org.uncle.lee.simpledatasource.Entity.in.Contact;
-import org.uncle.lee.simpledatasource.Entity.out.UniApp;
-import org.uncle.lee.simpledatasource.Entity.out.UniContact;
-import org.uncle.lee.simpledatasource.Utils.pinyin.pinyin4j.PinYin4j;
+import org.uncle.lee.nativedatasource.Entity.in.App;
+import org.uncle.lee.nativedatasource.Entity.in.Contact;
+import org.uncle.lee.nativedatasource.Entity.out.UniApp;
+import org.uncle.lee.nativedatasource.Entity.out.UniContact;
+import org.uncle.lee.nativedatasource.Utils.pinyin.pinyin4j.PinYin4j;
 
 /**
  * Created by Austin on 2016/7/7.
